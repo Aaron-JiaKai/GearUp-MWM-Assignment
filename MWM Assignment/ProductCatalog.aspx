@@ -3,10 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container">
         <div class="row g-0">
-            <div class="row text-center">
-                <h1 class="fw-bold">Product Catalog</h1>
+            <div class="row g-0 my-3">
+                <h3 class="text-secondary">PRODUCT CATALOG</h3>
+                <hr />
             </div>
-            <hr />
             <div class="row g-0 mb-3">
                 <div class="col-auto">
                     <div class="form-floating me-3 py-1">
@@ -30,16 +30,14 @@
             <asp:ListView ID="ListView1" runat="server" OnItemCommand="ListView1_ItemCommand1">
                 <ItemTemplate>
                     <div class="col-lg-3 col-md-6">
-                        <div class="card my-2 shadow-sm">
+                        <div class="card p-1 my-2 shadow-sm">
                             <div class="row g-0">
                                 <div class="col-6 col-md-12">
-                                    <asp:Image ID="Image1" runat="server" CssClass="card-img" ImageUrl='<%# Eval("image") %>' Style="height: 150px; object-fit: cover" />
+                                    <asp:Image ID="Image1" runat="server" CssClass="card-img" ImageUrl='<%# Eval("image") %>' Style="height: 200px; object-fit: contain" />
                                 </div>
                                 <div class="card-body col-6 col-md-12">
                                     <asp:Label ID="pidLabel" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
                                     <asp:Label ID="nameLabel" runat="server" CssClass="card-title" Text='<%# Eval("name") %>' />
-                                    <br />
-                                    <asp:Label ID="descLabel" runat="server" CssClass="card-text text-secondary fw-light" Text='<%# Eval("description") %>' />
                                     <br />
                                     <asp:Label ID="priceLabel" runat="server" CssClass="card-text text-danger" Text='<%# Eval("price", "{0:C}") %>' />
                                     <br />

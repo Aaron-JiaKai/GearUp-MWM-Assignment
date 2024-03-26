@@ -28,16 +28,5 @@
                 <asp:Button runat="server" ID="btnUpdate" Text="Update" CssClass="btn btn-primary" OnClick="btnUpdate_Click" />
             </div>
         </div>
-
-        <div class="row">
-
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CSMWM2311 %>" SelectCommand="SELECT * FROM [tblCustomers]" UpdateCommand="UPDATE tblCustomers SET name = @name WHERE id = @id">
-                <UpdateParameters>
-                    <asp:ControlParameter ControlID="txtName" Name="name" PropertyName="Text" />
-                    <asp:SessionParameter Name="id" SessionField="id" />
-                </UpdateParameters>
-            </asp:SqlDataSource>
-
-        </div>
     </main>
 </asp:Content>

@@ -8,7 +8,7 @@
         <hr />
         <div class="row justify-content-center my-5">
             <div class="col-12 col-md-6">
-                <asp:Image CssClass="img-fluid rounded" runat="server" ID="img_Image" ImageUrl="https://placehold.co/600x400" Style="height: 400px; width: 100%; object-fit: cover" />
+                <asp:Image CssClass="img-fluid rounded" runat="server" ID="img_Image" ImageUrl="https://placehold.co/600x400" Style="height: 400px; width: 100%; object-fit: contain" />
             </div>
             <div class="col-12 col-md-6">
                 <div class="row g-0">

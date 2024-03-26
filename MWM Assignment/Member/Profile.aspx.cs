@@ -19,7 +19,7 @@ namespace MWM_Assignment
             {
                 if (Session["uid"] == null)
                 {
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("../Default.aspx");
                 }
                 else
                 {
@@ -30,11 +30,6 @@ namespace MWM_Assignment
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            SqlDataSource1.Update();
-
-            Session["name"] = getNewName(Session["uid"].ToString().Trim());
-
-            Response.Write("Update Success");
         }
 
         private void populateFields(String id)
@@ -62,7 +57,6 @@ namespace MWM_Assignment
         private String getNewName(String id)
         {
             string newName = "";
-            string strConn = ConfigurationManager.ConnectionStrings["CSMWM2311"].ConnectionString;
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
 

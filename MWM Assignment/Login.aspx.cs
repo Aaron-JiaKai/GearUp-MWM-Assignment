@@ -20,30 +20,65 @@ namespace MWM_Assignment
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            if (login())
+            {
+                setStatus(true, "Login Successful! Welcome back.");
+                Response.Redirect("Default.aspx");
+            } else
+            {
+                setStatus(false, "Login Failed! Please try again!");
+            }
+
+            
+        }
+
+        private bool login()
+        {
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
 
             string query = "SELECT * FROM tblCustomers WHERE email = @email AND password = @password";
 
-            SqlCommand conm = new SqlCommand(query, conn);
-            conm.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
-            conm.Parameters.AddWithValue("@password", txtPassword.Text.Trim());
+            SqlCommand comm = new SqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
+            comm.Parameters.AddWithValue("@password", txtPassword.Text.Trim());
 
-            SqlDataReader reader = conm.ExecuteReader();
+            SqlDataReader reader = comm.ExecuteReader();
+
             if (reader.Read())
             {
-                Response.Write("LOGIN SUCCESS");
                 Session["uid"] = reader["id"];
                 Session["name"] = reader["name"];
-                Response.Redirect("Default.aspx");
+                Session["profileImg"] = reader["profilePicture"];
+
+                reader.Close();
+                conn.Close();
+                return true;
             }
             else
             {
-                Response.Write("LOGIN FAILED");
+                reader.Close();
+                conn.Close();
+                return false;
+            }
+        }
+
+        private void setStatus(bool status, string message)
+        {
+            if (status)
+            {
+                lblStatusIcon.CssClass = "bi-check-circle";
+                statusBg.Attributes["class"] = "text-center text-md-start py-2 px-3 px-xl-5 align-items-center text-white bg-success";
+            }
+            else
+            {
+                lblStatusIcon.CssClass = "bi-x-circle";
+                statusBg.Attributes["class"] = "text-center text-md-start py-2 px-3 px-xl-5 align-items-center text-white bg-danger";
             }
 
-            reader.Close();
-            conn.Close();
+            lblStatus.Text = message;
+
+            divStatus.Visible = true;
         }
     }
 }

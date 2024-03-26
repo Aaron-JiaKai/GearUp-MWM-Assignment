@@ -222,7 +222,7 @@ namespace MWM_Assignment
                 insertCart();
             }
 
-            Response.Redirect("ShoppingCart.aspx");
+            Response.Redirect("Member/ShoppingCart.aspx");
         }
     }
 }

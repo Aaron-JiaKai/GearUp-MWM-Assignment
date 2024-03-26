@@ -3,32 +3,51 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container">
         <div class="justify-content-center align-items-center d-grid" style="min-height: 80vh">
-            <div class="p-5 bg-white rounded">
+            <div class="p-5 bg-white rounded shadow-sm">
                 <div class="row">
                     <h1 class="fw-bold mb-3">Glad to have you onboard!</h1>
+                    <hr />
                 </div>
                 <div class="row">
-                    <div class="col-md-9 col-lg-6 col-xl-5">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid">
-                    </div>
-                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <div class="col">
+                        <div class="mb-3">
+                            <a onclick="chooseFile()">
+                                <img id="profileImage" src="/Images/Placeholder/placeholder-user.jpg" alt="Profile Image" class="m-2 img-fluid profile-image" />
+                            </a>
+                            <asp:FileUpload runat="server" ID="fuProfile" ClientIDMode="Static" CssClass="d-none" onchange="img();" />
+                        </div>
+                        <hr />
 
                         <!-- Name input -->
-                        <div class="form-outline mb-4">
+                        <div class="form-floating mb-3">
+                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="John Doe"/>
                             <asp:Label runat="server" ID="lblName" AssociatedControlID="txtName" CssClass="form-label" Text="Name" />
-                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control form-control-lg" Style="max-width: 100%" placeholder="Enter name" />
                         </div>
 
+                    </div>
+                    <div class="col">
                         <!-- Email input -->
-                        <div class="form-outline mb-4">
+                        <div class="form-floating mb-3">
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control w-100" TextMode="Email" autocomplete="off" placeholder="example@example.com" />
                             <asp:Label runat="server" ID="lblEmail" AssociatedControlID="txtEmail" CssClass="form-label" Text="Email Address" />
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control form-control-lg" Style="max-width: 100%" placeholder="Enter a valid email address" />
                         </div>
 
                         <!-- Password input -->
-                        <div class="form-outline mb-3">
+                        <div class="form-floating mb-3">
+                            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Enter password" />
                             <asp:Label runat="server" ID="lblPassword" AssociatedControlID="txtPassword" CssClass="form-label" Text="Password" />
-                            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control form-control-lg" TextMode="Password" Style="max-width: 100%" placeholder="Enter password" />
+                        </div>
+
+                        <!-- Confirm Password input -->
+                        <div class="form-floating mb-3">
+                            <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Confirm password" />
+                            <asp:Label runat="server" ID="lblConfirmPassword" AssociatedControlID="txtPassword" CssClass="form-label" Text="Enter your Password again" />
+                        </div>
+
+                        <!-- Address input -->
+                        <div class="form-floating mb-3">
+                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder=" " Style="height: 10rem" />
+                            <asp:Label runat="server" ID="lblAddress" AssociatedControlID="txtName" CssClass="form-label" Text="Address" />
                         </div>
 
                         <div class="text-center text-lg-start mt-4 pt-2">
@@ -40,6 +59,7 @@
             </div>
         </div>
 
+
         <!-- Status Message -->
         <div runat="server" id="divStatus">
             <div class="position-fixed bottom-0 start-0 w-100">
@@ -49,39 +69,24 @@
                 </div>
             </div>
         </div>
-
-        <!-- SQL Data Source -->
-        <div class="row">
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:GearUpDB %>" DeleteCommand="DELETE FROM [tblCustomers] WHERE [id] = @original_id AND (([name] = @original_name) OR ([name] IS NULL AND @original_name IS NULL)) AND (([email] = @original_email) OR ([email] IS NULL AND @original_email IS NULL)) AND (([password] = @original_password) OR ([password] IS NULL AND @original_password IS NULL)) AND (([dtAdded] = @original_dtAdded) OR ([dtAdded] IS NULL AND @original_dtAdded IS NULL)) AND (([active] = @original_active) OR ([active] IS NULL AND @original_active IS NULL))" InsertCommand="INSERT INTO [tblCustomers] ([name], [email], [password], [dtAdded], [active]) VALUES (@name, @email, @password, @dtAdded, @active)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [tblCustomers]" UpdateCommand="UPDATE [tblCustomers] SET [name] = @name, [email] = @email, [password] = @password, [dtAdded] = @dtAdded, [active] = @active WHERE [id] = @original_id AND (([name] = @original_name) OR ([name] IS NULL AND @original_name IS NULL)) AND (([email] = @original_email) OR ([email] IS NULL AND @original_email IS NULL)) AND (([password] = @original_password) OR ([password] IS NULL AND @original_password IS NULL)) AND (([dtAdded] = @original_dtAdded) OR ([dtAdded] IS NULL AND @original_dtAdded IS NULL)) AND (([active] = @original_active) OR ([active] IS NULL AND @original_active IS NULL))">
-                <DeleteParameters>
-                    <asp:Parameter Name="original_id" Type="Int32" />
-                    <asp:Parameter Name="original_name" Type="String" />
-                    <asp:Parameter Name="original_email" Type="String" />
-                    <asp:Parameter Name="original_password" Type="String" />
-                    <asp:Parameter Name="original_dtAdded" Type="DateTime" />
-                    <asp:Parameter Name="original_active" Type="Int32" />
-                </DeleteParameters>
-                <InsertParameters>
-                    <asp:ControlParameter ControlID="txtName" Name="name" PropertyName="Text" Type="String" />
-                    <asp:ControlParameter ControlID="txtEmail" Name="email" PropertyName="Text" Type="String" />
-                    <asp:ControlParameter ControlID="txtPassword" Name="password" PropertyName="Text" Type="String" />
-                    <asp:ControlParameter ControlID="lblCurrentDt" DefaultValue="" Name="dtAdded" PropertyName="Text" Type="DateTime" />
-                    <asp:Parameter DefaultValue="1" Name="active" Type="Int32" />
-                </InsertParameters>
-                <UpdateParameters>
-                    <asp:Parameter Name="name" Type="String" />
-                    <asp:Parameter Name="email" Type="String" />
-                    <asp:Parameter Name="password" Type="String" />
-                    <asp:Parameter Name="dtAdded" Type="DateTime" />
-                    <asp:Parameter Name="active" Type="Int32" />
-                    <asp:Parameter Name="original_id" Type="Int32" />
-                    <asp:Parameter Name="original_name" Type="String" />
-                    <asp:Parameter Name="original_email" Type="String" />
-                    <asp:Parameter Name="original_password" Type="String" />
-                    <asp:Parameter Name="original_dtAdded" Type="DateTime" />
-                    <asp:Parameter Name="original_active" Type="Int32" />
-                </UpdateParameters>
-            </asp:SqlDataSource>
-        </div>
+        <!-- Status Message -->
     </main>
+
+    <script type="text/javascript">
+
+        function chooseFile() {
+            document.getElementById("fuProfile").click();
+        }
+
+        function img() {
+            var url = inputToURL(document.getElementById("<%= fuProfile.ClientID %>"));
+            document.getElementById("profileImage").src = url;
+        }
+
+        function inputToURL(inputElement) {
+            var file = inputElement.files[0];
+            return window.URL.createObjectURL(file);
+        }
+
+    </script>
 </asp:Content>

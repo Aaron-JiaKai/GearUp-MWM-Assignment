@@ -38,10 +38,10 @@
             <div class="row">
                 <asp:ListView ID="lvCategories" runat="server" OnItemCommand="lvCategories_ItemCommand">
                     <ItemTemplate>
-                        <div class="col-lg-3 col-md-6">
+                        <div class="col-lg-3 col-6">
                             <a href="ProductCatalog.aspx?cid=<%# Eval("cid") %>">
-                                <div class="card m-1 bg-dark text-white cards">
-                                    <img src="<%# Eval("image") %>" class="card-img category-image" alt="<%# Eval("name") %>">
+                                <div class="card m-1 bg-white text-dark cards">
+                                    <img src="<%# Eval("image") %>" class="card-img category-image-fit" alt="<%# Eval("name") %>">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title"><%# Eval("name") %></h5>
                                         <p class="card-text"><%# Eval("description") %></p>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -19,21 +20,59 @@ namespace MWM_Assignment
             {
                 divStatus.Visible = false;
             }
+
         }
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
-            if (checkNewUser())
+            if (txtPassword.Text == txtConfirmPassword.Text && checkNewUser())
             {
                 if (insertUser())
                 {
                     Response.Redirect("Login.aspx");
                 }
             }
+            else
+            {
+                setStatus(false, "Password does not match! Please try again.");
+            }
+        }
+
+        private string saveImage()
+        {
+            string fileUrl;
+
+            if (fuProfile.HasFile)
+            {
+                string ext = Path.GetExtension(fuProfile.FileName);
+
+                string path = Server.MapPath("Images//Profile//");
+                if (!System.IO.Directory.Exists(path))
+                {
+                    System.IO.Directory.CreateDirectory(path);
+                }
+
+                fuProfile.SaveAs(Server.MapPath("Images//Profile//" + txtName.Text + ext));
+                fileUrl = "~/Images/Profile/" + txtName.Text + ext;
+
+            }
+            else
+            {
+                fileUrl = "~/Images/Placeholder/placeholder-user";
+            }
+
+            return fileUrl;
         }
 
         private bool insertUser()
         {
+            string fileUrl = saveImage();
+            if (fileUrl == null)
+            {
+                setStatus(false, "Something went wrong. Please try again.");
+                return false;
+            }
+
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
 
@@ -44,8 +83,8 @@ namespace MWM_Assignment
             comm.Parameters.AddWithValue("@name", txtName.Text.Trim());
             comm.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
             comm.Parameters.AddWithValue("@password", txtPassword.Text.Trim());
-            comm.Parameters.AddWithValue("@address", "");
-            comm.Parameters.AddWithValue("@profilePicture", "");
+            comm.Parameters.AddWithValue("@address", txtAddress.Text.Trim());
+            comm.Parameters.AddWithValue("@profilePicture", fileUrl);
             comm.Parameters.AddWithValue("@dtAdded", DateTime.Now);
             comm.Parameters.AddWithValue("@active", 1);
 

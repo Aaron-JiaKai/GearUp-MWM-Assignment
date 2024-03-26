@@ -39,6 +39,15 @@
             </div>
         </div>
 
-
+        <!-- Status Message -->
+        <div runat="server" id="divStatus">
+            <div class="position-fixed bottom-0 start-0 w-100">
+                <div runat="server" id="statusBg" class="text-center text-md-start py-2 px-3 px-xl-5 align-items-center text-white">
+                    <asp:Label runat="server" ID="lblStatusIcon" CssClass="bi-check-circle text-white h2" />
+                    <asp:Label runat="server" ID="lblStatus" Text="" />
+                </div>
+            </div>
+        </div>
+        <!-- Status Message -->
     </main>
 </asp:Content>

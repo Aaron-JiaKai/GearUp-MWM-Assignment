@@ -18,7 +18,7 @@ namespace MWM_Assignment
         {
             if (Session["uid"] == null)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("../Login.aspx");
                 return;
             }
 

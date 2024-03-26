@@ -18,7 +18,7 @@ namespace MWM_Assignment
         {
             if (Session["uid"] == null)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("../Login.aspx");
             }
 
             if (!IsPostBack) loadCart();
@@ -48,7 +48,7 @@ namespace MWM_Assignment
 
             int uid = int.Parse(Session["uid"].ToString());
 
-            string query = "select sc.*, p.*, (sc.qty * p.price) as 'subtotal', p.qty as 'stock' from tblShoppingCart sc inner join tblProducts p on sc.pid = p.pid where sc.uid = @uid and status='Pending'";
+            string query = "select sc.*, p.*, (sc.qty * p.price) as 'subtotal' from tblShoppingCart sc inner join tblProducts p on sc.pid = p.pid where sc.uid = @uid and status='Pending'";
 
             // SQL Command
             SqlCommand comm = new SqlCommand(query, conn);

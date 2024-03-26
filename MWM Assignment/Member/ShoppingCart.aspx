@@ -61,7 +61,7 @@
                     </ItemTemplate>
                 </asp:DataList>
                 <div runat="server" class="row p-2 rounded" id="emptyCart" visible="false">
-                    <a href="ProductCatalog.aspx">Your cart is empty! Click here to continue shopping!</a>
+                    <a href="../ProductCatalog.aspx">Your cart is empty! Click here to continue shopping!</a>
                 </div>
             </div>
         </div>

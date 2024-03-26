@@ -128,7 +128,7 @@ namespace MWM_Assignment
             conn.Open();
 
             // Query
-            string query = "select * from tblProducts";
+            string query = "select * from tblProducts p inner join tblCategory c on p.cid = c.cid where c.active = 1";
 
             // SQL Command
             SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
@@ -147,7 +147,7 @@ namespace MWM_Assignment
             conn.Open();
 
             // Query
-            string query = "select * from tblProducts where cid = @cid";
+            string query = "select * from tblProducts p inner join tblCategory c on p.cid = c.cid where c.active = 1 and c.cid = @cid";
 
             // SQL Command
             SqlCommand comm = new SqlCommand(query, conn);
@@ -168,7 +168,7 @@ namespace MWM_Assignment
             conn.Open();
 
             // Query
-            string query = "select * from tblProducts ";
+            string query = "select * from tblProducts p inner join tblCategory c on p.cid = c.cid where c.active = 1";
 
             if (asc)
             {
@@ -194,7 +194,7 @@ namespace MWM_Assignment
             conn.Open();
 
             // Query
-            string query = "select * from tblCategory";
+            string query = "select * from tblCategory where active = 1";
 
             // SQL Command
             SqlDataAdapter adapter = new SqlDataAdapter(query, conn);

@@ -9,7 +9,7 @@
                 </div>
                 <div class="row g-0 justify-content-center align-content-center">
                     <div class="col-12 col-md-6 text-center">
-                        <img src="/Images/circle_green_checkmark.svg" style="height: 10rem; width: 10rem">
+                        <img src="/Images/Placeholder/circle_green_checkmark.svg" style="height: 10rem; width: 10rem">
                     </div>
                     <hr class=" my-3 d-md-none" />
                     <div class="col-12 col-md-6">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="row mt-5 mb-2 justify-content-center">
-                    <a href="Default.aspx" class="btn btn-primary" style="width: 18rem;">Back to Main Page</a>
+                    <a href="../Default.aspx" class="btn btn-primary" style="width: 18rem;">Back to Main Page</a>
                 </div>
             </div>
         </div>

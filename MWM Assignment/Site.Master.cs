@@ -24,6 +24,12 @@ namespace MWM_Assignment
                 lbLogout.Visible = false;
             }
 
+            if (Session["profileImg"] != null && Session["name"] != null)
+            {
+                imgProfile.ImageUrl = Session["profileImg"].ToString();
+                lblProfile.Text = Session["name"].ToString();
+            }
+
         }
 
         protected void lbLogout_Click(object sender, EventArgs e)
