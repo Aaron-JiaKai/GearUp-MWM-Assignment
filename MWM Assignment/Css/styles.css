@@ -1,0 +1,42 @@
+﻿body {
+    background-color: #fcfaff
+}
+
+.center-image {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: contain;
+    height: 150px;
+    min-height: 150px;
+}
+
+.main-carousel-image {
+    height: 70vh;
+    object-fit: cover;
+    opacity: 0.6
+}
+
+.category-image {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.cards {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+    .cards:hover {
+        box-shadow: 5px 6px 6px 2px #e9ecef;
+        transform: scale(1.05);
+    }
+
+        .cards:hover .category-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
