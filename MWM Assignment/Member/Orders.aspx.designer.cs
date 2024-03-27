@@ -11,53 +11,44 @@ namespace MWM_Assignment
 {
 
 
-    public partial class ShoppingCart
+    public partial class Orders
     {
 
         /// <summary>
-        /// dlCart control.
+        /// dlPaid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList dlCart;
+        protected global::System.Web.UI.WebControls.DataList dlPaid;
 
         /// <summary>
-        /// emptyCart control.
+        /// dlShipped control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl emptyCart;
+        protected global::System.Web.UI.WebControls.DataList dlShipped;
 
         /// <summary>
-        /// lblItems control.
+        /// dlDelivered control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblItems;
+        protected global::System.Web.UI.WebControls.DataList dlDelivered;
 
         /// <summary>
-        /// lblTotal control.
+        /// dlCancelled control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotal;
-
-        /// <summary>
-        /// btnCheckout control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCheckout;
+        protected global::System.Web.UI.WebControls.DataList dlCancelled;
 
         /// <summary>
         /// divStatus control.

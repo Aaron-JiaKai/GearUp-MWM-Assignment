@@ -35,8 +35,12 @@ namespace MWM_Assignment
 
             if (dt.Rows.Count == 0) emptyCart.Visible = true;
 
+
+            int itemCount = dt.Rows.Count;
+            lblItems.Text = "Total ("+ itemCount.ToString() + (itemCount == 1 ? " item": " items") + "): ";
+
             double total = getGrandTotal();
-            lblTotal.Text = "Grand Sub-Total: " + string.Format("{0:C}", total);
+            lblTotal.Text = string.Format("{0:C}", total);
 
 
         }
@@ -100,11 +104,11 @@ namespace MWM_Assignment
             int result = comm.ExecuteNonQuery();
             if (result > 0)
             {
-                lblStatus.Text = "Updated!";
+                setStatus(true, "Updated!");
             }
             else
             {
-                lblStatus.Text = "Something went wrong. Please try again.";
+                setStatus(false, "Something went wrong! Please try again.");
             }
             conn.Close();
         }
@@ -124,12 +128,11 @@ namespace MWM_Assignment
             int result = comm.ExecuteNonQuery();
             if (result > 0)
             {
-                lblStatus.Text = "Deleted!";
-                lblStatus.CssClass = "text-danger";
+                setStatus(true, "Deleted!");
             }
             else
             {
-                lblStatus.Text = "Something went wrong. Please try again.";
+                setStatus(false, "Something went wrong! Please try again.");
             }
             conn.Close();
         }
@@ -171,10 +174,27 @@ namespace MWM_Assignment
             }
             else
             {
-                lblStatus.Text = "No items found!";
-                lblStatus.CssClass = "text-danger";
+                setStatus(false, "No items found!");
             }
 
+        }
+
+        private void setStatus(bool status, string message)
+        {
+            if (status)
+            {
+                lblStatusIcon.CssClass = "bi-check-circle";
+                statusBg.Attributes["class"] = "text-center text-md-start py-2 px-3 px-xl-5 align-items-center text-white bg-success";
+            }
+            else
+            {
+                lblStatusIcon.CssClass = "bi-x-circle";
+                statusBg.Attributes["class"] = "text-center text-md-start py-2 px-3 px-xl-5 align-items-center text-white bg-danger";
+            }
+
+            lblStatus.Text = message;
+
+            divStatus.Visible = true;
         }
     }
 }

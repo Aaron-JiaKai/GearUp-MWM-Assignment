@@ -50,7 +50,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item " runat="server" href="~/Member/Profile">Profile</a>
-                                <a class="dropdown-item " runat="server" href="#">Orders</a>
+                                <a class="dropdown-item " runat="server" href="~/Member/Orders">Orders</a>
                             </div>
                         </li>
 

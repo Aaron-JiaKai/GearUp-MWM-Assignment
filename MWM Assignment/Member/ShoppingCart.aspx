@@ -2,78 +2,112 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container">
-        <h3>Your Cart</h3>
-
-        <div class="row bg-white p-3 rounded border border-opacity-10 mb-3">
-            <div class="align-items-center row">
+        <div class="px-5 py-3 bg-white rounded shadow-sm mb-3">
+            <div class="row mb-5">
+                <h1 class="fw-bold mb-3">Your Cart</h1>
+            </div>
+            <div class="align-items-center">
                 <asp:DataList ID="dlCart" runat="server" RepeatColumns="1" RepeatDirection="Vertical" Width="100%" OnItemCommand="dlCart_ItemCommand">
                     <HeaderTemplate>
-                        <div class="row p-2">
-                            <div class="col">
-                                <p class="fw-bold">Image</p>
-                            </div>
-                            <div class="col">
-                                <p class="fw-bold">Item</p>
-                            </div>
-                            <div class="col">
-                                <p class="fw-bold">Price</p>
-                            </div>
-                            <div class="col">
-                                <p class="fw-bold">Quantity</p>
-                            </div>
-                            <div class="col">
-                                <p class="fw-bold">Sub-Total</p>
-                            </div>
-                            <div class="col">
-                                <p class="fw-bold">Action</p>
+                        <div class="border-0">
+                            <div class="row align-items-center">
+                                <div class="col-auto me-3" style="min-width: 184px;">
+                                    <h5 class="fw-bold">Products</h5>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-4 d-none d-md-flex">
+                                        </div>
+                                        <div class="col d-none d-lg-flex">
+                                            <h5 class="fw-bold">Unit Price</h5>
+                                        </div>
+                                        <div class="col d-none d-md-flex">
+                                            <h5 class="fw-bold">Quantity</h5>
+                                        </div>
+                                        <div class="col d-none d-md-flex">
+                                            <h5 class="fw-bold">Subtotal</h5>
+                                        </div>
+                                        <div class="col d-none d-md-flex">
+                                            <h5 class="fw-bold">Action</h5>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <hr />
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <div class="row p-2 rounded">
-                            <div class="row" style="display: none">
-                                <asp:Label ID="pidLabel" runat="server" CssClass="fw-bold" Text='<%# Eval("pid") %>' />
-                            </div>
-                            <div class="col">
-                                <asp:Image ID="Image1" runat="server" CssClass="rounded float-start" ImageUrl='<%# Eval("image") %>' Style="height: 10rem; width: 100%; object-fit: cover" />
-                            </div>
-                            <div class="col">
-                                <asp:Label ID="nameLabel" runat="server" CssClass="fw-bold" Text='<%# Eval("name") %>' />
-                                <br />
-                                <asp:Label ID="descLabel" runat="server" CssClass="small text-secondary" Text='<%# Eval("description") %>' />
-                            </div>
-                            <div class="col">
-                                <asp:Label ID="priceLabel" runat="server" CssClass="text-danger" Text='<%# Eval("price", "{0:C}") %>' />
-                            </div>
-                            <div class="col">
-                                <asp:TextBox ID="txtQty" runat="server" CssClass="form-control" TextMode="Number" Text='<%# Eval("qty") %>'></asp:TextBox>
-                            </div>
-                            <div class="col">
-                                <asp:Label ID="subtotalLabel" runat="server" CssClass="text-danger" Text='<%# Eval("subtotal", "{0:C}") %>' />
-                            </div>
-                            <div class="col">
-                                <asp:LinkButton CssClass="me-3" ID="btnUpdate" runat="server" CommandName="update" CommandArgument='<%# Eval("pid") %>'><i class="bi-check-circle-fill"></i></asp:LinkButton>
-                                <asp:LinkButton CssClass="mt-3" ID="btnDelete" runat="server" CommandName="delete" CommandArgument='<%# Eval("pid") %>'><i class="bi-trash-fill text-danger"></i></asp:LinkButton>
+                        <div class="border-0">
+                            <div class="row align-items-center">
+                                <div class="col-auto me-3">
+                                    <asp:Image ID="Image1" runat="server" CssClass="img-fluid" ImageUrl='<%# Eval("image") %>' Style="height: 10rem; width: 10rem; object-fit: contain" />
+                                </div>
+                                <div class="col">
+                                    <div class="row align-items-center">
+                                        <div class="col-12 col-md-4">
+                                            <div class="mb-3">
+                                                <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
+                                                <asp:Label ID="Label2" runat="server" CssClass="h5" Text='<%# Eval("name") %>' />
+                                            </div>
+                                        </div>
+                                        <div class="col d-none d-lg-flex">
+                                            <asp:Label ID="Label5" runat="server" CssClass="text-secondary " Text='<%# Eval("price", "{0:C}") %>' />
+                                        </div>
+                                        <div class="col-12 col-md order-2 order-md-1">
+                                            <div class="mb-1">
+                                                <label class="text-secondary d-md-none">Qty: </label>
+                                                <asp:TextBox ID="txtQty" runat="server" CssClass="form-control cart-textbox" TextMode="Number" Text='<%# Eval("qty") %>'></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md order-1 order-md-2 ">
+                                            <div class="mb-1 justify-content-center">
+                                                <label class="text-secondary d-md-none">Subtotal: </label>
+                                                <asp:Label ID="Label4" runat="server" CssClass="text-danger" Text='<%# Eval("subtotal", "{0:C}") %>' />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md order-3">
+                                            <div class="me-3 btn-group" role="group">
+                                                <asp:LinkButton ID="LinkButton1" CssClass="btn btn-primary" runat="server" CommandName="update" CommandArgument='<%# Eval("pid") %>'><i class="bi bi-check-circle"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="LinkButton2" CssClass="btn btn-danger" runat="server" CommandName="delete" CommandArgument='<%# Eval("pid") %>'><i class="bi bi-trash"></i></asp:LinkButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <hr />
                     </ItemTemplate>
                 </asp:DataList>
+
                 <div runat="server" class="row p-2 rounded" id="emptyCart" visible="false">
                     <a href="../ProductCatalog.aspx">Your cart is empty! Click here to continue shopping!</a>
                 </div>
             </div>
         </div>
 
-        <div class="row bg-white p-3 rounded border border-opacity-10">
-            <div class="col-3">
-                <asp:Label CssClass="text-primary" runat="server" ID="lblStatus" Text="" />
-            </div>
-            <div class="col-9 text-end">
-                <asp:Label CssClass="h3 fw-bold text-danger mx-3 px-3" runat="server" ID="lblTotal" Text="" />
-                <asp:Button CssClass="btn btn-primary" runat="server" ID="btnCheckout" Text="Check Out" OnClick="btnCheckout_Click" />
+        <div class="px-5 py-3 bg-white rounded shadow-sm">
+            <div class="row justify-content-end align-items-center">
+                <div class="col col-md-auto me-5 mb-3 mb-md-0">
+                    <asp:Label CssClass="h5 fw-bold me-3" runat="server" ID="lblItems" Text="" />
+                    <asp:Label CssClass="h3 fw-bold text-danger" runat="server" ID="lblTotal" Text="" />
+                </div>
+                <div class="col-12 col-md-auto ">
+                    <asp:Button CssClass="btn btn-primary px-5" runat="server" ID="btnCheckout" Text="Check Out" OnClick="btnCheckout_Click" />
+                </div>
             </div>
         </div>
+
+
+        <!-- Status Message -->
+        <div runat="server" id="divStatus">
+            <div class="position-fixed bottom-0 start-0 w-100">
+                <div runat="server" id="statusBg" class="text-center text-md-start py-2 px-3 px-xl-5 align-items-center text-white">
+                    <asp:Label runat="server" ID="lblStatusIcon" CssClass="bi-check-circle text-white h2" />
+                    <asp:Label runat="server" ID="lblStatus" Text="" />
+                </div>
+            </div>
+        </div>
+        <!-- Status Message -->
     </main>
 </asp:Content>

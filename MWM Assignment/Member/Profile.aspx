@@ -13,7 +13,7 @@
                     <div class="col-auto me-5">
                         <div class="mb-3">
                             <a onclick="chooseFile()">
-                                <img id="profileImage" runat="server" src="~/Images/Placeholder/placeholder-user.jpg" alt="Profile Image" class="m-2 img-fluid profile-image" />
+                                <img id="profileImage" runat="server" src="~/Images/Placeholder/placeholder-user.jpg" alt="Profile Image" class="m-2 img-fluid profile-image" ClientIDMode="Static"/>
                             </a>
                             <asp:FileUpload runat="server" ID="fuProfile" ClientIDMode="Static" CssClass="d-none" onchange="img();" />
                         </div>
@@ -21,13 +21,13 @@
                     <div class="col-12 col-md">
                         <!-- Name input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="John Doe" style="min-width:100%" />
+                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="John Doe" Style="min-width: 100%" />
                             <asp:Label runat="server" ID="lblName" AssociatedControlID="txtName" CssClass="form-label" Text="Name" />
                         </div>
 
                         <!-- Address input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder=" " Style="height: 8rem; min-width:100%" />
+                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder=" " Style="height: 8rem; min-width: 100%" />
                             <asp:Label runat="server" ID="lblAddress" AssociatedControlID="txtName" CssClass="form-label" Text="Address" />
                         </div>
                     </div>
@@ -38,21 +38,21 @@
                     <div class="col-12">
                         <!-- Email input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" autocomplete="off" ReadOnly="true" placeholder="example@example.com" style="min-width:100%"  />
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" autocomplete="off" ReadOnly="true" placeholder="example@example.com" Style="min-width: 100%" />
                             <asp:Label runat="server" ID="lblEmail" AssociatedControlID="txtEmail" CssClass="form-label" Text="Email Address" />
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <!-- Password input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Enter password" style="min-width:100%"  />
+                            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Enter password" Style="min-width: 100%" />
                             <asp:Label runat="server" ID="lblPassword" AssociatedControlID="txtPassword" CssClass="form-label" Text="Password" />
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <!-- Confirm Password input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Confirm password" style="min-width:100%" />
+                            <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Confirm password" Style="min-width: 100%" />
                             <asp:Label runat="server" ID="lblConfirmPassword" AssociatedControlID="txtPassword" CssClass="form-label" Text="Enter your Password again" />
                         </div>
                     </div>
@@ -77,9 +77,6 @@
         </div>
         <!-- Status Message -->
     </main>
-</asp:Content>
-
-<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="JSContent">
 
     <script type="text/javascript">
 
@@ -88,7 +85,7 @@
         }
 
         function img() {
-            var url = inputToURL(document.getElementById("<%= fuProfile.ClientID %>"));
+            var url = inputToURL(document.getElementById("fuProfile"));
             document.getElementById("profileImage").src = url;
         }
 
@@ -99,4 +96,7 @@
 
     </script>
 
+</asp:Content>
+
+<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="JSContent">
 </asp:Content>

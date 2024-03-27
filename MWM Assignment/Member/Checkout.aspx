@@ -2,27 +2,33 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container">
-        <h3 class="fw-bold">Checkout</h3>
 
-        <div class="px-5 py-2 mt-5 shadow shadow-sm rounded bg-white">
-            <div class="mx-auto align-items-center">
+        <div class="px-5 py-3 bg-white rounded shadow-sm">
+
+            <div class="row mb-5">
+                <h1 class="fw-bold mb-3">Checkout</h1>
+            </div>
+
+            <div class="align-items-center">
                 <asp:DataList ID="dlCart" runat="server" RepeatColumns="1" RepeatDirection="Vertical" Width="100%">
                     <HeaderTemplate>
                         <div class="border-0">
-                            <div class="row justify-content-between align-items-center">
-                                <div class="col-12 col-md-5">
-                                    <h5 class="fw-bold">Products Ordered</h5>
+                            <div class="row align-items-center">
+                                <div class="col-auto me-3" style="min-width: 184px;">
+                                    <h5 class="fw-bold">Products</h5>
                                 </div>
-                                <div class="col-md-7">
-                                    <div class="row ">
-                                        <div class="col d-none d-md-flex">
-                                            <p class="fw-bold">Unit Price</p>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-4 d-none d-md-flex">
+                                        </div>
+                                        <div class="col d-none d-lg-flex">
+                                            <h5 class="fw-bold">Unit Price</h5>
                                         </div>
                                         <div class="col d-none d-md-flex">
-                                            <p class="fw-bold">Quantity</p>
+                                            <h5 class="fw-bold">Quantity</h5>
                                         </div>
                                         <div class="col d-none d-md-flex">
-                                            <p class="fw-bold">Sub-Total</p>
+                                            <h5 class="fw-bold">Subtotal</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -31,30 +37,31 @@
                         <hr />
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <div class="card mb-2 border-0">
-                            <div class="row g-0 align-items-center">
-                                <div class="col-6 col-md-3 pe-md-5 pe-2">
-                                    <asp:Image ID="Image2" runat="server" CssClass="card-img img-fluid" ImageUrl='<%# Eval("image") %>' Style="height: 150px; width: 100%; object-fit: cover" />
-                                </div>
-                                <div class="card-body col-6 col-md-9">
-                                    <div class="row">
-                                        <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
-                                        <asp:Label ID="Label2" runat="server" CssClass="card-title h5 fw-bold" Text='<%# Eval("name") %>' />
+                        <div class="row align-items-center">
+                            <div class="col-auto me-3">
+                                <asp:Image ID="Image1" runat="server" CssClass="img-fluid" ImageUrl='<%# Eval("image") %>' Style="height: 10rem; width: 10rem; object-fit: contain" />
+                            </div>
+                            <div class="col">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-md-4">
+                                        <div class="mb-3">
+                                            <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
+                                            <asp:Label ID="Label2" runat="server" CssClass="h5" Text='<%# Eval("name") %>' />
+                                        </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md order-1 mb-2">
-                                            <asp:Label ID="Label3" runat="server" CssClass="small text-secondary " Width="150" Text='<%#Eval("description") %>' />
+                                    <div class="col d-none d-lg-flex">
+                                        <asp:Label ID="Label5" runat="server" CssClass="text-secondary" Text='<%# Eval("price", "{0:C}") %>' />
+                                    </div>
+                                    <div class="col-12 col-md order-2 order-md-1">
+                                        <div class="mb-1">
+                                            <label class="text-secondary d-md-none">Qty: </label>
+                                            <asp:Label ID="Label3" runat="server" Text='<%# Eval("qty") %>' />
                                         </div>
-                                        <div class="col-12 col-md order-3 order-sm-2">
-                                            <label class="d-md-none text-secondary">Price: </label>
-                                            <asp:Label ID="Label4" runat="server" CssClass="text-danger" Text='<%# Eval("price", "{0:C}") %>' />
-                                        </div>
-                                        <div class="col-12 col-md order-2 order-sm-3">
-                                            <label class="d-md-none text-secondary">Quantity: </label>
-                                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("qty") %>' />
-                                        </div>
-                                        <div class="col d-none d-md-flex order-4">
-                                            <asp:Label ID="Label6" runat="server" CssClass="text-danger fw-bold" Text='<%# Eval("subtotal", "{0:C}") %>' />
+                                    </div>
+                                    <div class="col-12 col-md order-1 order-md-2">
+                                        <div class="mb-1">
+                                            <label class="text-secondary d-md-none">Subtotal: </label>
+                                            <asp:Label ID="Label4" runat="server" CssClass="text-danger" Text='<%# Eval("subtotal", "{0:C}") %>' />
                                         </div>
                                     </div>
                                 </div>
@@ -85,12 +92,12 @@
         </div>
     </main>
 
-<%--    
+    <%--    
     <div class="position-fixed bottom-0 start-0 w-100">
         <div class="text-center text-md-start py-2 px-3 px-xl-5 bg-success align-items-center">
             <i class="bi-check-circle-fill text-white h2"></i>
             <span class="text-white h5 ms-3">Order Received</span>
         </div>
     </div>
---%>
+    --%>
 </asp:Content>

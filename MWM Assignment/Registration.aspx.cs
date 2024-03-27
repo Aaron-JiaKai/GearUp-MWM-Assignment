@@ -46,13 +46,13 @@ namespace MWM_Assignment
             {
                 string ext = Path.GetExtension(fuProfile.FileName);
 
-                string path = Server.MapPath("Images//Profile//");
+                string path = Server.MapPath("~//Images//Profile//");
                 if (!System.IO.Directory.Exists(path))
                 {
                     System.IO.Directory.CreateDirectory(path);
                 }
 
-                fuProfile.SaveAs(Server.MapPath("Images//Profile//" + txtName.Text + ext));
+                fuProfile.SaveAs(Server.MapPath("~//Images//Profile//" + txtName.Text + ext));
                 fileUrl = "~/Images/Profile/" + txtName.Text + ext;
 
             }

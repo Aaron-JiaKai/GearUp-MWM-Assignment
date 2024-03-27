@@ -107,6 +107,10 @@
     margin-top: -15px;
 }
 
+.cart-textbox {
+    width: 100%;
+}
+
 @media (max-width: 767px) {
     .carousel-size {
         height: 40vh;
@@ -117,5 +121,9 @@
         height: 40vh;
         object-fit: cover;
         opacity: 0.6
+    }
+
+    .cart-textbox {
+        width: 50%;
     }
 }

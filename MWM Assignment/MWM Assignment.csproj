@@ -165,6 +165,7 @@
     <Content Include="Member\Payment.aspx" />
     <Content Include="Member\Profile.aspx" />
     <Content Include="Member\ShoppingCart.aspx" />
+    <Content Include="Member\Orders.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -302,6 +303,13 @@
     </Compile>
     <Compile Include="Member\ShoppingCart.aspx.designer.cs">
       <DependentUpon>ShoppingCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\Orders.aspx.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\Orders.aspx.designer.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
