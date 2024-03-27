@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -15,66 +16,60 @@ namespace MWM_Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["uid"] == null)
             {
-                if (Session["uid"] == null)
-                {
-                    Response.Redirect("../Default.aspx");
-                }
-                else
-                {
-                    populateFields(Session["uid"].ToString());
-                }
+                Response.Redirect("~/");
+                return;
             }
+
+            if (!IsPostBack) populateUser();
+
+        }
+
+        private void populateUser()
+        {
+            string uid = Session["uid"].ToString();
+            DataTable dt = getUser(uid);
+
+            if (dt.Rows.Count == 1)
+            {
+                txtName.Text = dt.Rows[0]["name"].ToString().Trim();
+                txtEmail.Text = dt.Rows[0]["email"].ToString().Trim();
+                txtAddress.Text = dt.Rows[0]["address"].ToString().Trim();
+                profileImage.Attributes["src"] = dt.Rows[0]["profilePicture"].ToString().Trim();
+            }
+        }
+
+        private DataTable getUser(string uid)
+        {
+            // Open Connection
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+
+            // Query
+            string query = "select * from tblCustomers where id = @id";
+
+            SqlCommand comm = new SqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@id", uid);
+
+            // SQL Command
+            SqlDataAdapter adapter = new SqlDataAdapter(comm);
+
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            conn.Close();
+            return dt;
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
+
         }
 
-        private void populateFields(String id)
+        private void updateUser()
         {
-            SqlConnection conn = new SqlConnection(strConn);
-            conn.Open();
 
-            string query = "SELECT * FROM tblCustomers WHERE id = @id;";
-
-            SqlCommand conm = new SqlCommand(query, conn);
-            conm.Parameters.AddWithValue("@id", id.Trim());
-
-            SqlDataReader reader = conm.ExecuteReader();
-            if (reader.Read())
-            {
-                txtEmail.Text = reader["email"].ToString();
-                txtName.Text = reader["name"].ToString();
-                lblCurrentDt.Text = DateTime.Now.ToString();
-            }
-
-            reader.Close();
-            conn.Close();
-        }
-
-        private String getNewName(String id)
-        {
-            string newName = "";
-            SqlConnection conn = new SqlConnection(strConn);
-            conn.Open();
-
-            string query = "SELECT name FROM tblCustomers WHERE id = @id;";
-
-            SqlCommand conm = new SqlCommand(query, conn);
-            conm.Parameters.AddWithValue("@id", id.Trim());
-
-            SqlDataReader reader = conm.ExecuteReader();
-            if (reader.Read())
-            {
-
-                newName = reader["name"].ToString();
-            }
-
-            reader.Close();
-            conn.Close();
-            return newName;
         }
     }
 }

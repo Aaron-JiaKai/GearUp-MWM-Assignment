@@ -36,20 +36,24 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" id="hProductCatalog" href="~/ProductCatalog">Products</a></li>
                     </ul>
-                    <ul class="navbar-nav align-items-baseline">
+                    <ul class="navbar-nav align-items-baseline mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" runat="server" id="hCart" href="~/Member/ShoppingCart">
                                 <i class="bi-cart-fill d-none d-sm-block"></i>
                                 <span class="d-sm-none">Shopping Cart</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" runat="server" id="hProfile" href="~/Member/Profile">
-                                <asp:Image runat="server" id="imgProfile" ImageUrl="#" CssClass="d-none d-sm-inline profile-image-nav" />
-                                <asp:Label runat="server" ID="lblProfile" CssClass="d-none d-sm-inline ms-1" Text="" />
-                                <span class="d-sm-none">Profile</span>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" runat="server" id="navbarDropdown">
+                                <asp:Image runat="server" ID="imgProfile" ImageUrl="#" CssClass="d-none d-sm-inline profile-image-nav" />
+                                <asp:Label runat="server" ID="lblProfile" CssClass="ms-sm-1" Text="" />
                             </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item " runat="server" href="~/Member/Profile">Profile</a>
+                                <a class="dropdown-item " runat="server" href="#">Orders</a>
+                            </div>
                         </li>
+
                         <li class="nav-item"><a class="nav-link" runat="server" id="hLogin" href="~/Login">Login</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" id="hRegister" href="~/Registration">Register</a></li>
                         <li class="nav-item">
@@ -69,5 +73,8 @@
             </footer>
         </div>
     </form>
+
+    <asp:ContentPlaceHolder ID="JSContent" runat="server">
+    </asp:ContentPlaceHolder>
 </body>
 </html>

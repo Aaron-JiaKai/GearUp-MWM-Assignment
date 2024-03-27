@@ -4,7 +4,7 @@
 
     <main>
         <%--Carousel--%>
-        <div id="mainCarousel" class="carousel slide mb-5" data-bs-ride="carousel" style="height: 70vh; margin-top: -15px">
+        <div id="mainCarousel" class="carousel slide mb-5 carousel-size" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <asp:ListView runat="server" ID="lvCarousel">
                     <ItemTemplate>

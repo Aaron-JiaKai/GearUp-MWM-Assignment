@@ -1,4 +1,5 @@
 ﻿body {
+    font-family: "Poppins", sans-serif;
     background-color: #fcfaff
 }
 
@@ -72,7 +73,7 @@
 }
 
 .cards {
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
 }
 
@@ -87,3 +88,34 @@
             object-fit: cover;
             opacity: 0.5;
         }
+
+    .cards .card-img-overlay {
+        
+        background-color: #00000050;
+        color: white;
+    }
+
+    .cards:hover .card-img-overlay {
+        background-color: #000000AD;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+
+.carousel-size {
+    height: 70vh;
+    margin-top: -15px;
+}
+
+@media (max-width: 767px) {
+    .carousel-size {
+        height: 40vh;
+        margin-top: -15px;
+    }
+
+    .main-carousel-image {
+        height: 40vh;
+        object-fit: cover;
+        opacity: 0.6
+    }
+}

@@ -20,7 +20,7 @@ namespace MWM_Assignment
             else
             {
                 hCart.Visible = false;
-                hProfile.Visible = false;
+                navbarDropdown.Visible = false;
                 lbLogout.Visible = false;
             }
 
@@ -36,7 +36,7 @@ namespace MWM_Assignment
         {
             Session.Clear();
             Session.Abandon();
-            Response.Redirect("Login.aspx");
+            Response.Redirect("~/");
         }
 
     }

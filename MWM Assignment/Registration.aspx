@@ -2,59 +2,66 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container">
-        <div class="justify-content-center align-items-center d-grid" style="min-height: 80vh">
-            <div class="p-5 bg-white rounded shadow-sm">
-                <div class="row">
+        <div class="justify-content-center align-items-center" style="min-height: 80vh">
+            <div class="px-5 py-3 mx-5 bg-white rounded shadow-sm">
+                <div class="row mb-5">
                     <h1 class="fw-bold mb-3">Glad to have you onboard!</h1>
-                    <hr />
                 </div>
-                <div class="row">
-                    <div class="col">
+                <h3 class="text-secondary">Account Information</h3>
+                <hr />
+                <div class="row mb-3">
+                    <div class="col-auto me-5">
                         <div class="mb-3">
                             <a onclick="chooseFile()">
                                 <img id="profileImage" src="/Images/Placeholder/placeholder-user.jpg" alt="Profile Image" class="m-2 img-fluid profile-image" />
                             </a>
                             <asp:FileUpload runat="server" ID="fuProfile" ClientIDMode="Static" CssClass="d-none" onchange="img();" />
                         </div>
-                        <hr />
-
+                    </div>
+                    <div class="col-12 col-md">
                         <!-- Name input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="John Doe"/>
+                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="John Doe" style="min-width:100%" />
                             <asp:Label runat="server" ID="lblName" AssociatedControlID="txtName" CssClass="form-label" Text="Name" />
-                        </div>
-
-                    </div>
-                    <div class="col">
-                        <!-- Email input -->
-                        <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control w-100" TextMode="Email" autocomplete="off" placeholder="example@example.com" />
-                            <asp:Label runat="server" ID="lblEmail" AssociatedControlID="txtEmail" CssClass="form-label" Text="Email Address" />
-                        </div>
-
-                        <!-- Password input -->
-                        <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Enter password" />
-                            <asp:Label runat="server" ID="lblPassword" AssociatedControlID="txtPassword" CssClass="form-label" Text="Password" />
-                        </div>
-
-                        <!-- Confirm Password input -->
-                        <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Confirm password" />
-                            <asp:Label runat="server" ID="lblConfirmPassword" AssociatedControlID="txtPassword" CssClass="form-label" Text="Enter your Password again" />
                         </div>
 
                         <!-- Address input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder=" " Style="height: 10rem" />
+                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder=" " Style="height: 8rem; min-width: 100%"  />
                             <asp:Label runat="server" ID="lblAddress" AssociatedControlID="txtName" CssClass="form-label" Text="Address" />
                         </div>
+                    </div>
+                </div>
+                <h3 class="text-secondary">Login Information</h3>
+                <hr />
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Email input -->
+                        <div class="form-floating mb-3">
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" autocomplete="off" placeholder="example@example.com" style="min-width:100%"/>
+                            <asp:Label runat="server" ID="lblEmail" AssociatedControlID="txtEmail" CssClass="form-label" Text="Email Address" />
+                        </div>
 
-                        <div class="text-center text-lg-start mt-4 pt-2">
-                            <asp:Button runat="server" ID="btnRegister" Text="Sign up" CssClass="btn btn-primary btn-lg" Style="padding-left: 2.5rem; padding-right: 2.5rem;" OnClick="btnRegister_Click" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <!-- Password input -->
+                        <div class="form-floating mb-3">
+                            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Enter password" style="min-width:100%"/>
+                            <asp:Label runat="server" ID="lblPassword" AssociatedControlID="txtPassword" CssClass="form-label" Text="Password" />
                         </div>
                     </div>
-
+                    <div class="col-12 col-md-6">
+                        <!-- Confirm Password input -->
+                        <div class="form-floating mb-3">
+                            <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Confirm password" style="min-width:100%"/>
+                            <asp:Label runat="server" ID="lblConfirmPassword" AssociatedControlID="txtPassword" CssClass="form-label" Text="Enter your Password again" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-0">
+                    <div class="col text-center mt-3">
+                        <asp:Button runat="server" ID="btnRegister" Text="Sign up" CssClass="btn btn-primary btn-lg" Style="padding-left: 2.5rem; padding-right: 2.5rem;" OnClick="btnRegister_Click" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,6 +78,8 @@
         </div>
         <!-- Status Message -->
     </main>
+</asp:Content>
+<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="JSContent">
 
     <script type="text/javascript">
 
@@ -89,4 +98,5 @@
         }
 
     </script>
+
 </asp:Content>
