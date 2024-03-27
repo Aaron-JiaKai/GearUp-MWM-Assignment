@@ -33,16 +33,11 @@ namespace MWM_Assignment
             dlCart.DataSource = dt;
             dlCart.DataBind();
 
-            if (dt.Rows.Count == 0) emptyCart.Visible = true;
-
-
             int itemCount = dt.Rows.Count;
             lblItems.Text = "Total ("+ itemCount.ToString() + (itemCount == 1 ? " item": " items") + "): ";
 
             double total = getGrandTotal();
             lblTotal.Text = string.Format("{0:C}", total);
-
-
         }
 
         private DataTable getCart()

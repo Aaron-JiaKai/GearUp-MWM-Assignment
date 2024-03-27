@@ -72,21 +72,32 @@
                 </asp:DataList>
             </div>
         </div>
-        <div class="px-5 py-3 mt-3 shadow shadow-sm rounded bg-white">
+        <div class="px-5 py-3 bg-white rounded shadow-sm">
             <div class="row">
-                <div class="col-12 col-md">
+                <div class="col-md-8">
                 </div>
-                <div class="col-12 col-md-4">
-                    <span class="text-secondary">Merchandise Total: </span>
-                    <asp:Label CssClass="text-secondary" runat="server" ID="lblTotal" Text="" />
-                    <br />
-                    <span class="text-secondary">SST (10%): </span>
-                    <asp:Label CssClass="text-secondary" runat="server" ID="lblSst" Text="SST" />
-                    <br />
-                    <span class="fw-bold">Grand Sub-Total: </span>
-                    <asp:Label CssClass="h5 fw-bold text-danger" runat="server" ID="lblGrandTotal" Text="Service" />
-                    <br />
-                    <asp:Button CssClass="btn btn-primary w-75 mt-3" runat="server" ID="btnPay" Text="Pay" OnClick="btnPay_Click" />
+                <div class="col col-md-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-secondary">Merchandise Total:</th>
+                                <th>
+                                    <asp:Label CssClass="text-secondary" runat="server" ID="lblTotal" Text="" /></th>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">SST (10%):</th>
+                                <th>
+                                    <asp:Label CssClass="text-secondary" runat="server" ID="lblTax" Text="" />
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Grand Sub-Total:</th>
+                                <th>
+                                    <asp:Label CssClass="h3 fw-bold text-danger" runat="server" ID="lblSubtotal" Text="" />
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@
                     <h1 class="fw-bold mb-3">Orders</h1>
                 </div>
                 <div class="mb-3">
-                    <ul class="nav nav-pills justify-content-end" id="myTab" role="tablist">
+                    <ul class="nav nav-pills justify-content-center justify-content-md-end" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="ship-tab" data-bs-toggle="tab" data-bs-target="#ship" type="button" role="tab" aria-controls="ship" aria-selected="true">To Ship</button>
                         </li>
@@ -30,11 +30,12 @@
                     <div class="tab-pane fade show active" id="ship" role="tabpanel" aria-labelledby="ship-tab">
                         <asp:DataList ID="dlPaid" runat="server" RepeatColumns="1" RepeatDirection="Vertical" Width="100%">
                             <ItemTemplate>
+
                                 <div class="bg-white border-0 shadow-sm p-3 rounded my-3">
                                     <div class="row align-items-center justify-content-between">
                                         <div class="col-auto">
                                             <span class="small text-secondary">Order Reference: </span>
-                                            <asp:Label ID="Label4" runat="server" CssClass="small text-secondary" Text='<%# Eval("oid") %>' />
+                                            <span id="dlPaid-orderRef-<%# Container.ItemIndex.ToString() %>" class="small text-secondary"><%# Eval("oid") %></span>
                                         </div>
                                         <div class="col text-end">
                                             <span class="text-secondary">| </span>
@@ -42,23 +43,34 @@
                                         </div>
                                     </div>
                                     <hr />
-                                    <div class="row">
-                                        <div class="col-auto me-3" style="min-width: 184px;">
-                                            <asp:Image ID="Image1" runat="server" CssClass="img-fluid p-2" ImageUrl='<%# Eval("image") %>' Style="height: 8rem; width: 8rem; object-fit: contain" />
-                                        </div>
-                                        <div class="col py-3">
-                                            <div class="row g-0">
-                                                <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
-                                                <asp:Label ID="Label2" runat="server" CssClass="h5" Text='<%# Eval("name") %>' />
+                                    <a href="OrderDetails.aspx?oid=<%# Eval("oid") %>" class="nav-link order-cards">
+                                        <div class="row">
+                                            <div class="col-auto me-3">
+                                                <asp:Image ID="Image1" runat="server" CssClass="img-fluid p-2" ImageUrl='<%# Eval("image") %>' Style="height: 8rem; width: 8rem; object-fit: contain" />
                                             </div>
-                                            <div>
-                                                <span class="small text-secondary">x</span>
-                                                <asp:Label ID="Label3" runat="server" CssClass="small text-secondary" Text='<%# Eval("qty") %>' />
+                                            <div class="col py-3">
+                                                <div class="row g-0">
+                                                    <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
+                                                    <div class="col-auto me-md-5">
+                                                        <asp:Label ID="Label2" runat="server" CssClass="h5" Text='<%# Eval("name") %>' />
+                                                    </div>
+                                                    <div class="col">
+                                                        <asp:Label ID="Label3" runat="server" CssClass="small text-secondary" Text='<%# "x" + Eval("qty").ToString().Trim() %>' />
+                                                    </div>
+                                                </div>
+                                                <div class="row my-3">
+                                                    <p class="text-muted small"><%# (int.Parse(Eval("items").ToString()) == 1 ? "" : "+ " + (int.Parse(Eval("items").ToString()) -1).ToString() + " other item(s).") %></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-auto py-3">
+                                                <div class="row g-0 text-end">
+                                                    <asp:Label ID="Label9" runat="server" CssClass="text-secondary" Text='<%# Eval("price", "{0:C}") %>' />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                     <hr />
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col text-end align-items-end">
                                             <div class="row g-0">
                                                 <div class="col text-start">
@@ -71,18 +83,34 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col text-end align-items-end">
+                                            <div class="row g-0">
+                                                <div class="col text-end">
+                                                    <button type="button" id="modalButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalStatic" onclick="getPaidOrderRef(<%# Container.ItemIndex.ToString() %>)">Cancel Order</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </ItemTemplate>
+                            <FooterTemplate>
+                                <div class="row mb-5 justify-content-center align-content-center text-center <%# (dlPaid.Items.Count != 0) ? "d-none" : ""%>">
+                                    <img src="~/Images/Placeholder/noOrders.png" runat="server" alt="No Data" style="height: 12rem; width: 12rem;" />
+                                    <p>No Orders Found</p>
+                                </div>
+                            </FooterTemplate>
                         </asp:DataList>
                     </div>
                     <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
                         <asp:DataList ID="dlShipped" runat="server" RepeatColumns="1" RepeatDirection="Vertical" Width="100%">
                             <ItemTemplate>
+
                                 <div class="bg-white border-0 shadow-sm p-3 rounded my-3">
                                     <div class="row align-items-center justify-content-between">
                                         <div class="col-auto">
                                             <span class="small text-secondary">Order Reference: </span>
-                                            <asp:Label ID="Label4" runat="server" CssClass="small text-secondary" Text='<%# Eval("oid") %>' />
+                                            <span id="dlShipped-orderRef-<%# Container.ItemIndex.ToString() %>" class="small text-secondary"><%# Eval("oid") %></span>
                                         </div>
                                         <div class="col text-end">
                                             <span class="text-secondary">| </span>
@@ -90,23 +118,34 @@
                                         </div>
                                     </div>
                                     <hr />
-                                    <div class="row">
-                                        <div class="col-auto me-3" style="min-width: 184px;">
-                                            <asp:Image ID="Image1" runat="server" CssClass="img-fluid p-2" ImageUrl='<%# Eval("image") %>' Style="height: 8rem; width: 8rem; object-fit: contain" />
-                                        </div>
-                                        <div class="col py-3">
-                                            <div class="row g-0">
-                                                <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
-                                                <asp:Label ID="Label2" runat="server" CssClass="h5" Text='<%# Eval("name") %>' />
+                                    <a href="OrderDetails.aspx?oid=<%# Eval("oid") %>" class="nav-link order-cards">
+                                        <div class="row">
+                                            <div class="col-auto me-3">
+                                                <asp:Image ID="Image1" runat="server" CssClass="img-fluid p-2" ImageUrl='<%# Eval("image") %>' Style="height: 8rem; width: 8rem; object-fit: contain" />
                                             </div>
-                                            <div>
-                                                <span class="small text-secondary">x</span>
-                                                <asp:Label ID="Label3" runat="server" CssClass="small text-secondary" Text='<%# Eval("qty") %>' />
+                                            <div class="col py-3">
+                                                <div class="row g-0">
+                                                    <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
+                                                    <div class="col-auto me-md-5">
+                                                        <asp:Label ID="Label2" runat="server" CssClass="h5" Text='<%# Eval("name") %>' />
+                                                    </div>
+                                                    <div class="col">
+                                                        <asp:Label ID="Label3" runat="server" CssClass="small text-secondary" Text='<%# "x" + Eval("qty").ToString().Trim() %>' />
+                                                    </div>
+                                                </div>
+                                                <div class="row my-3">
+                                                    <p class="text-muted small"><%# (int.Parse(Eval("items").ToString()) == 1 ? "" : "+ " + (int.Parse(Eval("items").ToString()) -1).ToString() + " other item(s).") %></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-auto py-3">
+                                                <div class="row g-0 text-end">
+                                                    <asp:Label ID="Label9" runat="server" CssClass="text-secondary" Text='<%# Eval("price", "{0:C}") %>' />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                     <hr />
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col text-end align-items-end">
                                             <div class="row g-0">
                                                 <div class="col text-start">
@@ -119,18 +158,34 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col text-end align-items-end">
+                                            <div class="row g-0">
+                                                <div class="col text-end">
+                                                    <button type="button" id="modalButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalStatic" onclick="getShippedOrderRef(<%# Container.ItemIndex.ToString() %>)">Order Received</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </ItemTemplate>
+                            <FooterTemplate>
+                                <div class="row mb-5 justify-content-center align-content-center text-center <%# (dlShipped.Items.Count != 0) ? "d-none" : ""%>">
+                                    <img src="~/Images/Placeholder/noOrders.png" runat="server" alt="No Data" style="height: 12rem; width: 12rem;" />
+                                    <p>No Orders Found</p>
+                                </div>
+                            </FooterTemplate>
                         </asp:DataList>
                     </div>
                     <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
                         <asp:DataList ID="dlDelivered" runat="server" RepeatColumns="1" RepeatDirection="Vertical" Width="100%">
                             <ItemTemplate>
+
                                 <div class="bg-white border-0 shadow-sm p-3 rounded my-3">
                                     <div class="row align-items-center justify-content-between">
                                         <div class="col-auto">
                                             <span class="small text-secondary">Order Reference: </span>
-                                            <asp:Label ID="Label4" runat="server" CssClass="small text-secondary" Text='<%# Eval("oid") %>' />
+                                            <span id="dlDelivered-orderRef-<%# Container.ItemIndex.ToString() %>" class="small text-secondary"><%# Eval("oid") %></span>
                                         </div>
                                         <div class="col text-end">
                                             <span class="text-secondary">| </span>
@@ -138,23 +193,34 @@
                                         </div>
                                     </div>
                                     <hr />
-                                    <div class="row">
-                                        <div class="col-auto me-3" style="min-width: 184px;">
-                                            <asp:Image ID="Image1" runat="server" CssClass="img-fluid p-2" ImageUrl='<%# Eval("image") %>' Style="height: 8rem; width: 8rem; object-fit: contain" />
-                                        </div>
-                                        <div class="col py-3">
-                                            <div class="row g-0">
-                                                <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
-                                                <asp:Label ID="Label2" runat="server" CssClass="h5" Text='<%# Eval("name") %>' />
+                                    <a href="OrderDetails.aspx?oid=<%# Eval("oid") %>" class="nav-link order-cards">
+                                        <div class="row">
+                                            <div class="col-auto me-3">
+                                                <asp:Image ID="Image1" runat="server" CssClass="img-fluid p-2" ImageUrl='<%# Eval("image") %>' Style="height: 8rem; width: 8rem; object-fit: contain" />
                                             </div>
-                                            <div>
-                                                <span class="small text-secondary">x</span>
-                                                <asp:Label ID="Label3" runat="server" CssClass="small text-secondary" Text='<%# Eval("qty") %>' />
+                                            <div class="col py-3">
+                                                <div class="row g-0">
+                                                    <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
+                                                    <div class="col-auto me-md-5">
+                                                        <asp:Label ID="Label2" runat="server" CssClass="h5" Text='<%# Eval("name") %>' />
+                                                    </div>
+                                                    <div class="col">
+                                                        <asp:Label ID="Label3" runat="server" CssClass="small text-secondary" Text='<%# "x" + Eval("qty").ToString().Trim() %>' />
+                                                    </div>
+                                                </div>
+                                                <div class="row my-3">
+                                                    <p class="text-muted small"><%# (int.Parse(Eval("items").ToString()) == 1 ? "" : "+ " + (int.Parse(Eval("items").ToString()) -1).ToString() + " other item(s).") %></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-auto py-3">
+                                                <div class="row g-0 text-end">
+                                                    <asp:Label ID="Label9" runat="server" CssClass="text-secondary" Text='<%# Eval("price", "{0:C}") %>' />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                     <hr />
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col text-end align-items-end">
                                             <div class="row g-0">
                                                 <div class="col text-start">
@@ -167,18 +233,34 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col text-end align-items-end">
+                                            <div class="row g-0">
+                                                <div class="col text-end">
+                                                    <button type="button" id="modalButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalStatic" onclick="getDeliveredOrderRef(<%# Container.ItemIndex.ToString() %>)">Rate</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </ItemTemplate>
+                            <FooterTemplate>
+                                <div class="row mb-5 justify-content-center align-content-center text-center <%# (dlDelivered.Items.Count != 0) ? "d-none" : ""%>">
+                                    <img src="~/Images/Placeholder/noOrders.png" runat="server" alt="No Data" style="height: 12rem; width: 12rem;" />
+                                    <p>No Orders Found</p>
+                                </div>
+                            </FooterTemplate>
                         </asp:DataList>
                     </div>
                     <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="cancelled-tab">
                         <asp:DataList ID="dlCancelled" runat="server" RepeatColumns="1" RepeatDirection="Vertical" Width="100%">
                             <ItemTemplate>
+
                                 <div class="bg-white border-0 shadow-sm p-3 rounded my-3">
                                     <div class="row align-items-center justify-content-between">
                                         <div class="col-auto">
                                             <span class="small text-secondary">Order Reference: </span>
-                                            <asp:Label ID="Label4" runat="server" CssClass="small text-secondary" Text='<%# Eval("oid") %>' />
+                                            <span id="dlCancelled-orderRef-<%# Container.ItemIndex.ToString() %>" class="small text-secondary"><%# Eval("oid") %></span>
                                         </div>
                                         <div class="col text-end">
                                             <span class="text-secondary">| </span>
@@ -186,23 +268,34 @@
                                         </div>
                                     </div>
                                     <hr />
-                                    <div class="row">
-                                        <div class="col-auto me-3" style="min-width: 184px;">
-                                            <asp:Image ID="Image1" runat="server" CssClass="img-fluid p-2" ImageUrl='<%# Eval("image") %>' Style="height: 8rem; width: 8rem; object-fit: contain" />
-                                        </div>
-                                        <div class="col py-3">
-                                            <div class="row g-0">
-                                                <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
-                                                <asp:Label ID="Label2" runat="server" CssClass="h5" Text='<%# Eval("name") %>' />
+                                    <a href="OrderDetails.aspx?oid=<%# Eval("oid") %>" class="nav-link order-cards">
+                                        <div class="row">
+                                            <div class="col-auto me-3">
+                                                <asp:Image ID="Image1" runat="server" CssClass="img-fluid p-2" ImageUrl='<%# Eval("image") %>' Style="height: 8rem; width: 8rem; object-fit: contain" />
                                             </div>
-                                            <div>
-                                                <span class="small text-secondary">x</span>
-                                                <asp:Label ID="Label3" runat="server" CssClass="small text-secondary" Text='<%# Eval("qty") %>' />
+                                            <div class="col py-3">
+                                                <div class="row g-0">
+                                                    <asp:Label ID="Label1" runat="server" CssClass="d-none" Text='<%# Eval("pid") %>' />
+                                                    <div class="col-auto me-md-5">
+                                                        <asp:Label ID="Label2" runat="server" CssClass="h5" Text='<%# Eval("name") %>' />
+                                                    </div>
+                                                    <div class="col">
+                                                        <asp:Label ID="Label3" runat="server" CssClass="small text-secondary" Text='<%# "x" + Eval("qty").ToString().Trim() %>' />
+                                                    </div>
+                                                </div>
+                                                <div class="row my-3">
+                                                    <p class="text-muted small"><%# (int.Parse(Eval("items").ToString()) == 1 ? "" : "+ " + (int.Parse(Eval("items").ToString()) -1).ToString() + " other item(s).") %></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-auto py-3">
+                                                <div class="row g-0 text-end">
+                                                    <asp:Label ID="Label9" runat="server" CssClass="text-secondary" Text='<%# Eval("price", "{0:C}") %>' />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                     <hr />
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col text-end align-items-end">
                                             <div class="row g-0">
                                                 <div class="col text-start">
@@ -217,12 +310,48 @@
                                     </div>
                                 </div>
                             </ItemTemplate>
+                            <FooterTemplate>
+                                <div class="row mb-5 justify-content-center align-content-center text-center <%# (dlCancelled.Items.Count != 0) ? "d-none" : ""%>">
+                                    <img src="~/Images/Placeholder/noOrders.png" runat="server" alt="No Data" style="height: 12rem; width: 12rem;" />
+                                    <p>No Orders Found</p>
+                                </div>
+                            </FooterTemplate>
                         </asp:DataList>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div hidden>
+            <asp:Button runat="server" ID='btnCancel' OnClick="btnCancel_Click" />
+            <asp:Button runat="server" ID='btnReceived' OnClick="btnReceived_Click" />
+            <asp:Button runat="server" ID='btnRate' OnClick="btnRate_Click" />
+            <asp:Button runat="server" ID='btnBuy' OnClick="btnBuy_Click" />
+            <asp:HiddenField runat="server" ClientIDMode="Static" ID="hfOid" Value="" />
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalStatic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cancel</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modalbodycontent">
+                            Are you sure you want to cancel this order? This cannot be undone!
+                        </p>
+                        <asp:Label ID="orderRefModal" ClientIDMode="Static" CssClass="small text-secondary" runat="server"></asp:Label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" onclick="cancelOrder()">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
 
         <!-- Status Message -->
         <div runat="server" id="divStatus">
@@ -238,4 +367,59 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JSContent" runat="server">
+
+    <script>
+
+
+
+        function getPaidOrderRef(row) {
+
+            var orderRef = document.getElementById("dlPaid-orderRef-" + row).innerText
+            document.getElementById("<%= hfOid.ClientID %>").value = orderRef
+
+            document.getElementById("modalbodycontent").innerText = "Are you sure you want to cancel this order? This cannot be undone!"
+            document.getElementById("modalbodycontent").attributes["button-mode"] = "cancel"
+        }
+
+        function getShippedOrderRef(row) {
+
+            var orderRef = document.getElementById("dlShipped-orderRef-" + row).innerText
+            document.getElementById("<%= hfOid.ClientID %>").value = orderRef
+
+            document.getElementById("modalbodycontent").innerText = "Mark order as received? This cannot be undone."
+            document.getElementById("modalbodycontent").attributes["button-mode"] = "receive"
+
+        }
+
+        function getDeliveredOrderRef(row) {
+
+            var orderRef = document.getElementById("dlDelivered-orderRef-" + row).innerText
+            document.getElementById("<%= hfOid.ClientID %>").value = orderRef
+            document.getElementById("modalbodycontent").attributes["button-mode"] = "rate"
+
+        }
+
+        function cancelOrder() {
+
+            var buttonMode = document.getElementById("modalbodycontent").attributes["button-mode"]
+
+            if (buttonMode == "cancel") {
+                document.getElementById('<%= btnCancel.ClientID %>').click();
+                return;
+            }
+
+            if (buttonMode == "receive") {
+                document.getElementById('<%= btnReceived.ClientID %>').click();
+                return;
+            }
+
+            if (buttonMode == "rate") {
+                document.getElementById('<%= btnRate.ClientID %>').click();
+                return;
+            }
+
+        }
+
+    </script>
+
 </asp:Content>

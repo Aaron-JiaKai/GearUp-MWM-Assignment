@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -62,6 +63,12 @@ namespace MWM_Assignment
             if (Session["uid"] == null)
             {
                 Response.Redirect("Login.aspx");
+            }
+
+            if (txt_Quantity.Text == string.Empty)
+            {
+                setStatus(false, "Quantity cannot be empty!");
+                return;
             }
 
             if (int.TryParse(txt_Quantity.Text, out quantity) && quantity < 1)

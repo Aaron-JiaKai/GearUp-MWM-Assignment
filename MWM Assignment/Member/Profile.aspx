@@ -13,7 +13,7 @@
                     <div class="col-auto me-5">
                         <div class="mb-3">
                             <a onclick="chooseFile()">
-                                <img id="profileImage" runat="server" src="~/Images/Placeholder/placeholder-user.jpg" alt="Profile Image" class="m-2 img-fluid profile-image" ClientIDMode="Static"/>
+                                <img id="profileImage" runat="server" src="~/Images/Placeholder/placeholder-user.jpg" alt="Profile Image" class="m-2 img-fluid profile-image" clientidmode="Static" />
                             </a>
                             <asp:FileUpload runat="server" ID="fuProfile" ClientIDMode="Static" CssClass="d-none" onchange="img();" />
                         </div>
@@ -77,7 +77,9 @@
         </div>
         <!-- Status Message -->
     </main>
+</asp:Content>
 
+<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="JSContent">
     <script type="text/javascript">
 
         function chooseFile() {
@@ -95,8 +97,4 @@
         }
 
     </script>
-
-</asp:Content>
-
-<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="JSContent">
 </asp:Content>

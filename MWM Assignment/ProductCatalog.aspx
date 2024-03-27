@@ -47,6 +47,12 @@
                         </div>
                     </div>
                 </ItemTemplate>
+                <EmptyDataTemplate>
+                    <div class="row justify-content-center align-content-center text-center">
+                        <img src="~/Images/Placeholder/noData.png" runat="server" alt="No Data" style="height: 12rem; width: 12rem;" />
+                        <label class="text-danger">No Products Found!</label>
+                    </div>
+                </EmptyDataTemplate>
             </asp:ListView>
         </div>
         <asp:Label runat="server" ID="lblMessage" Text="" />

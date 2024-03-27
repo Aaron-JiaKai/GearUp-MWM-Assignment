@@ -11,17 +11,17 @@ namespace MWM_Assignment
 {
 
 
-    public partial class Checkout
+    public partial class OrderDetails
     {
 
         /// <summary>
-        /// dlCart control.
+        /// dlOrders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList dlCart;
+        protected global::System.Web.UI.WebControls.DataList dlOrders;
 
         /// <summary>
         /// lblTotal control.

@@ -78,11 +78,13 @@
                         </div>
                         <hr />
                     </ItemTemplate>
+                    <FooterTemplate>
+                        <div class="row mb-5 justify-content-center align-content-center text-center <%# (dlCart.Items.Count != 0) ? "d-none" : ""%>">
+                            <img src="~/Images/Placeholder/emptyCart.png" runat="server" alt="No Data" style="height: 12rem; width: 12rem;" />
+                            <a href="../ProductCatalog.aspx">Your cart is empty! Click here to continue shopping!</a>
+                        </div>
+                    </FooterTemplate>
                 </asp:DataList>
-
-                <div runat="server" class="row p-2 rounded" id="emptyCart" visible="false">
-                    <a href="../ProductCatalog.aspx">Your cart is empty! Click here to continue shopping!</a>
-                </div>
             </div>
         </div>
 

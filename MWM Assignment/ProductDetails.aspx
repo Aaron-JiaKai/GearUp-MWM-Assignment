@@ -23,7 +23,7 @@
                     </div>
 
                     <asp:Label runat="server" ID="lblQuantity" AssociatedControlID="txt_Quantity" Text="Quantity" CssClass="form-text" />
-                    <asp:TextBox CssClass="form-control" runat="server" Text="1" TextMode="Number" ID="txt_Quantity"></asp:TextBox>
+                    <asp:TextBox CssClass="form-control" runat="server" Text="1" TextMode="Number" ID="txt_Quantity" min="1"></asp:TextBox>
 
 
                     <div class="btn-group my-3 " role="group">

@@ -37,9 +37,12 @@
                         <li class="nav-item"><a class="nav-link" runat="server" id="hProductCatalog" href="~/ProductCatalog">Products</a></li>
                     </ul>
                     <ul class="navbar-nav align-items-baseline mr-auto">
-                        <li class="nav-item">
+                        <li class="nav-item me-3">
                             <a class="nav-link" runat="server" id="hCart" href="~/Member/ShoppingCart">
-                                <i class="bi-cart-fill d-none d-sm-block"></i>
+                                <i class="bi bi-cart-fill d-none d-sm-block position-relative" style="font-size:20px">
+                                    <asp:Label runat="server" ID="cartCount" CssClass="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: x-small; font-style: normal"></asp:Label>
+                                </i>
+                                
                                 <span class="d-sm-none">Shopping Cart</span>
                             </a>
                         </li>

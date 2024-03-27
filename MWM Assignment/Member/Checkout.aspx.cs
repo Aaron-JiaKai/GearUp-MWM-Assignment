@@ -33,8 +33,8 @@ namespace MWM_Assignment
 
             double total = getGrandTotal();
             lblTotal.Text = string.Format("{0:C}", total);
-            lblSst.Text = string.Format("{0:C}", total * 0.1);
-            lblGrandTotal.Text = string.Format("{0:C}", total * 0.1 + total);
+            lblTax.Text = string.Format("{0:C}", total * 0.1);
+            lblSubtotal.Text = string.Format("{0:C}", total * 0.1 + total);
         }
 
         private DataTable getCart()

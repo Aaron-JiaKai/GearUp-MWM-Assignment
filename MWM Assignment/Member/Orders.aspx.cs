@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.EnterpriseServices;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace MWM_Assignment
 {
@@ -30,7 +33,7 @@ namespace MWM_Assignment
                 return;
             }
 
-            populateData();
+            if (!IsPostBack) populateData();
         }
 
         private void populateData()
@@ -59,7 +62,7 @@ namespace MWM_Assignment
 
             string status = statusDictionary[statusCd];
 
-            string query = "select o.oid,sum(o.subTotal + o.tax) as 'subtotal',min(o.pid) as 'pid', (select qty from tblOrders o2 where o2.oid = min(o.oid) and o2.pid = min(o.pid)) as 'qty', (select dtAdded from tblOrders o2 where o2.oid = min(o.oid) and o2.pid = min(o.pid)) as 'dtAdded', (select status from tblOrders o2 where o2.oid = min(o.oid) and o2.pid = min(o.pid)) as 'status' ,(select name from tblProducts where pid = min(o.pid)) as 'name',(select image from tblProducts where pid = min(o.pid)) as 'image',count(*) as 'items' FROM tblOrders o where status = @status GROUP BY o.oid order by min(o.dtAdded) desc;";
+            string query = "select o.oid,sum(o.subTotal + o.tax) as 'subtotal',min(o.pid) as 'pid', (select qty from tblOrders o2 where o2.oid = min(o.oid) and o2.pid = min(o.pid)) as 'qty', (select price from tblOrders o2 where o2.oid = min(o.oid) and o2.pid = min(o.pid)) as 'price', (select dtAdded from tblOrders o2 where o2.oid = min(o.oid) and o2.pid = min(o.pid)) as 'dtAdded', (select status from tblOrders o2 where o2.oid = min(o.oid) and o2.pid = min(o.pid)) as 'status' ,(select name from tblProducts where pid = min(o.pid)) as 'name',(select image from tblProducts where pid = min(o.pid)) as 'image',count(*) as 'items' FROM tblOrders o where status = @status GROUP BY o.oid order by min(o.dtAdded) desc;";
 
             // SQL Command
             SqlCommand comm = new SqlCommand(query, conn);
@@ -70,6 +73,66 @@ namespace MWM_Assignment
             da.Fill(dt);
 
             return dt;
+        }
+
+        private void setStatus(bool status, string message)
+        {
+            if (status)
+            {
+                lblStatusIcon.CssClass = "bi-check-circle";
+                statusBg.Attributes["class"] = "text-center text-md-start py-2 px-3 px-xl-5 align-items-center text-white bg-success";
+            }
+            else
+            {
+                lblStatusIcon.CssClass = "bi-x-circle";
+                statusBg.Attributes["class"] = "text-center text-md-start py-2 px-3 px-xl-5 align-items-center text-white bg-danger";
+            }
+
+            lblStatus.Text = message;
+
+            divStatus.Visible = true;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            string oid = hfOid.Value.ToString().Trim();
+
+            updateOrderStatus(oid, "Cancelled");
+        }
+
+        protected void btnReceived_Click(object sender, EventArgs e)
+        {
+            string oid = hfOid.Value.ToString().Trim();
+
+            updateOrderStatus(oid, "Delivered");
+        }
+
+        protected void btnRate_Click(object sender, EventArgs e)
+        {
+            Response.Write("Rate orders");
+        }
+
+        protected void btnBuy_Click(object sender, EventArgs e)
+        {
+            Response.Write("Add order to cart");
+        }
+
+
+        private void updateOrderStatus(string oid, string status)
+        {
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+
+            // Query
+            string query = "UPDATE tblOrders SET status = @status, dtUpdated = GETDATE() WHERE oid=@oid";
+            SqlCommand comm = new SqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@status", status);
+            comm.Parameters.AddWithValue("@oid", oid);
+
+            comm.ExecuteNonQuery();
+            conn.Close();
+
+            populateData();
         }
     }
 }
