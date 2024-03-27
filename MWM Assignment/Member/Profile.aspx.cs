@@ -135,12 +135,12 @@ namespace MWM_Assignment
                         comm.Parameters.AddWithValue("@id", uid);
 
                         comm.ExecuteNonQuery();
-                        
+
                     }
                     transaction.Commit();
                     conn.Close();
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     transaction.Rollback();
                     setStatus(false, ex.Message);
@@ -163,9 +163,10 @@ namespace MWM_Assignment
                     System.IO.Directory.CreateDirectory(directory);
                 }
                 string[] files = Directory.GetFiles(directory);
+
                 foreach (string file in files)
                 {
-                    if (Path.GetFileNameWithoutExtension(file) == txtName.Text)
+                    if (Path.GetFileNameWithoutExtension(file) == Session["name"].ToString())
                     {
                         System.IO.File.Delete(file);
                     }
