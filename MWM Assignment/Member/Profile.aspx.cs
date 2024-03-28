@@ -37,6 +37,7 @@ namespace MWM_Assignment
                 txtName.Text = dt.Rows[0]["name"].ToString().Trim();
                 txtEmail.Text = dt.Rows[0]["email"].ToString().Trim();
                 txtAddress.Text = dt.Rows[0]["address"].ToString().Trim();
+                txtPhone.Text = dt.Rows[0]["contact"].ToString().Trim();
                 profileImage.Attributes["src"] = dt.Rows[0]["profilePicture"].ToString().Trim();
             }
         }
@@ -115,6 +116,17 @@ namespace MWM_Assignment
                         comm.ExecuteNonQuery();
                     }
 
+                    if (txtPhone.Text != "")
+                    {
+                        // Query
+                        string query = "UPDATE tblCustomers SET contact = @contact WHERE id=@id";
+                        SqlCommand comm = new SqlCommand(query, conn, transaction);
+                        comm.Parameters.AddWithValue("@contact", txtPhone.Text);
+                        comm.Parameters.AddWithValue("@id", uid);
+
+                        comm.ExecuteNonQuery();
+                    }
+
                     if (txtPassword.Text != "" && (txtPassword.Text == txtConfirmPassword.Text))
                     {
                         // Query
@@ -135,8 +147,8 @@ namespace MWM_Assignment
                         comm.Parameters.AddWithValue("@id", uid);
 
                         comm.ExecuteNonQuery();
-
                     }
+
                     transaction.Commit();
                     conn.Close();
                 }

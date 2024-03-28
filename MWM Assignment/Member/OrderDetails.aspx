@@ -2,10 +2,31 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container">
-        <div class="px-5 pt-3 bg-white rounded shadow-sm mb-5">
-            <div class="row mb-5">
+        <div class="px-5 pt-3 bg-white rounded shadow-sm mb-3">
+            <div class="row mb-3">
                 <h1 class="fw-bold mb-3">Order Details</h1>
             </div>
+        </div>
+
+        <div class="px-5 py-3 bg-white rounded shadow-sm mb-3">
+            <div class="row">
+                <div class="col">
+                    <h5 class="fw-bold">Delivery Address:</h5>
+                    <asp:Label runat="server" ID="lblName" Text="Placeholder" CssClass="text-secondary fw-bold" />
+                    <br />
+                    <asp:Label runat="server" ID="lblContact" Text="Placeholder" CssClass="text-muted small" />
+                    <br />
+                    <asp:Label runat="server" ID="lblAddress" Text="Placeholder" CssClass="text-muted small" />
+                </div>
+                <div class="col text-end text-success">
+                    <i class="bi bi-truck"></i>
+                    <asp:Label runat="server" ID="lblStatus" Text="Placeholder" />
+                    <br />
+                    <asp:Label runat="server" ID="lblDtUpdated" Text="Placeholder" CssClass="small text-muted" />
+                </div>
+            </div>
+
+            <!-- Continue Heres -->
         </div>
 
         <div class="px-5 py-3 bg-white rounded shadow-sm mb-3">
@@ -75,7 +96,7 @@
             <div class="row">
                 <div class="col-md-8">
                 </div>
-                <div class="col col-md-4">
+                <div class="col col-md-4 text-end">
                     <table class="table">
                         <thead>
                             <tr>

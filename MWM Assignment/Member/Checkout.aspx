@@ -76,7 +76,7 @@
             <div class="row">
                 <div class="col-md-8">
                 </div>
-                <div class="col col-md-4">
+                <div class="col col-md-4 text-end">
                     <table class="table">
                         <thead>
                             <tr>
@@ -98,17 +98,9 @@
                             </tr>
                         </thead>
                     </table>
+                    <asp:Button runat="server" ID="btnPay" Text="Pay" CssClass="btn btn-primary w-100" OnClick="btnPay_Click" />
                 </div>
             </div>
         </div>
     </main>
-
-    <%--    
-    <div class="position-fixed bottom-0 start-0 w-100">
-        <div class="text-center text-md-start py-2 px-3 px-xl-5 bg-success align-items-center">
-            <i class="bi-check-circle-fill text-white h2"></i>
-            <span class="text-white h5 ms-3">Order Received</span>
-        </div>
-    </div>
-    --%>
 </asp:Content>

@@ -76,7 +76,7 @@ namespace MWM_Assignment
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
 
-            string query = "insert into tblCustomers (name, email, password, address, profilePicture, dtAdded, active) values (@name, @email, @password, @address, @profilePicture, @dtAdded, @active)";
+            string query = "insert into tblCustomers (name, email, password, address, contact, profilePicture, dtAdded, active) values (@name, @email, @password, @address, @contact, @profilePicture, @dtAdded, @active)";
 
             // SQL Command
             SqlCommand comm = new SqlCommand(query, conn);
@@ -84,6 +84,7 @@ namespace MWM_Assignment
             comm.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
             comm.Parameters.AddWithValue("@password", txtPassword.Text.Trim());
             comm.Parameters.AddWithValue("@address", txtAddress.Text.Trim());
+            comm.Parameters.AddWithValue("@contact", txtPhone.Text.Trim());
             comm.Parameters.AddWithValue("@profilePicture", fileUrl);
             comm.Parameters.AddWithValue("@dtAdded", DateTime.Now);
             comm.Parameters.AddWithValue("@active", 1);

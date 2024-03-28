@@ -19,10 +19,21 @@
                         </div>
                     </div>
                     <div class="col-12 col-md">
-                        <!-- Name input -->
-                        <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="John Doe" Style="min-width: 100%" />
-                            <asp:Label runat="server" ID="lblName" AssociatedControlID="txtName" CssClass="form-label" Text="Name" />
+                        <div class="row">
+                            <div class="col-12 col-md">
+                                <!-- Name input -->
+                                <div class="form-floating mb-3">
+                                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="John Doe" Style="min-width: 100%" />
+                                    <asp:Label runat="server" ID="lblName" AssociatedControlID="txtName" CssClass="form-label" Text="Name" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-md">
+                                <!-- Contact input -->
+                                <div class="form-floating mb-3">
+                                    <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" placeholder="012-34567890" Style="min-width: 100%" />
+                                    <asp:Label runat="server" ID="lblPhone" AssociatedControlID="txtPhone" CssClass="form-label" Text="Contact" />
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Address input -->

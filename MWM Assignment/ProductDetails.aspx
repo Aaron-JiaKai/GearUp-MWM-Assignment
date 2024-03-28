@@ -14,11 +14,18 @@
                 <div class="row g-0">
                     <div class="card">
                         <div class="card-body">
-                            <asp:Label runat="server" ID="lblName" Text="Placeholder" CssClass="fw-bold h5" />
+                            <div class="row">
+                                <div class="col">
+                                    <asp:Label runat="server" ID="lblName" Text="Placeholder" CssClass="fw-bold h5" />
+                                </div>
+                                <div class="col-auto text-end">
+                                    <asp:Label runat="server" ID="lblPrice" Text="Placeholder" CssClass="text-danger py-3"></asp:Label>
+                                </div>
+                            </div>
                             <hr />
-                            <asp:Label runat="server" ID="lblPrice" Text="Placeholder" CssClass="text-danger py-3"></asp:Label>
-                            <br />
-                            <asp:Label runat="server" ID="lblDescription" Text="Placeholder" />
+                            <div class="row">
+                                <asp:Label runat="server" ID="lblDescription" Text="Placeholder"/>
+                            </div>
                         </div>
                     </div>
 

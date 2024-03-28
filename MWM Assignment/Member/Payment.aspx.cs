@@ -57,6 +57,12 @@ namespace MWM_Assignment
         {
             DataTable cartData = (DataTable)Session["CartData"];
 
+            DataTable userData = getUser();
+            if (userData.Rows.Count == 0)
+            {
+                throw new Exception();
+            }
+
             Guid uuid = Guid.NewGuid();
 
             SqlConnection conn = new SqlConnection(strConn);
@@ -66,7 +72,8 @@ namespace MWM_Assignment
             {
                 try
                 {
-                    string query = "INSERT INTO tblOrders (oid, pid, uid, qty, price, subtotal, tax, dtAdded, status) VALUES (@oid, @pid, @uid, @qty, @price, @subTotal, @tax, @dtAdded, @status)";
+                    string query = "INSERT INTO tblOrders (oid, pid, uid, qty, price, subtotal, tax, name, address, contact, dtAdded, dtUpdated, status) VALUES " +
+                        "(@oid, @pid, @uid, @qty, @price, @subTotal, @tax, @name, @address, @contact , GETDATE(), GETDATE(), @status)";
 
                     foreach (DataRow row in cartData.Rows)
                     {
@@ -82,8 +89,10 @@ namespace MWM_Assignment
                         comm.Parameters.AddWithValue("@price", row["price"]);
                         comm.Parameters.AddWithValue("@subtotal", row["subtotal"]);
                         comm.Parameters.AddWithValue("@tax", tax);
-                        comm.Parameters.AddWithValue("@dtAdded", DateTime.Now);
-                        comm.Parameters.AddWithValue("@status", "Paid"); // 0 when delete
+                        comm.Parameters.AddWithValue("@name", userData.Rows[0]["name"]);
+                        comm.Parameters.AddWithValue("@address", userData.Rows[0]["address"]);
+                        comm.Parameters.AddWithValue("@contact", userData.Rows[0]["contact"]);
+                        comm.Parameters.AddWithValue("@status", "Paid");
 
                         int result = comm.ExecuteNonQuery();
                     }
@@ -133,6 +142,28 @@ namespace MWM_Assignment
             // SQL Command
             SqlCommand comm = new SqlCommand(query, conn);
             comm.Parameters.AddWithValue("@oid", orderRef);
+
+            SqlDataAdapter da = new SqlDataAdapter(comm);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            conn.Close();
+
+            return dt;
+        }
+
+        private DataTable getUser()
+        {
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+
+            int uid = int.Parse(Session["uid"].ToString());
+
+            string query = "select * from tblCustomers where id = @uid";
+
+            // SQL Command
+            SqlCommand comm = new SqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@uid", Session["uid"].ToString());
 
             SqlDataAdapter da = new SqlDataAdapter(comm);
             DataTable dt = new DataTable();

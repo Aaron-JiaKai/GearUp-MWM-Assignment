@@ -32,28 +32,20 @@ namespace MWM_Assignment
         private void loadProducts()
         {
             DataTable dt = getRandomProducts();
-
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                dt.Rows[i]["image"] = dt.Rows[i]["image"].ToString().Remove(0, 1);
-            }
-
             lvCarousel.DataSource = dt;
             lvCarousel.DataBind();
+
+            DataTable dt2 = getTopProducts();
+            lvTopProducts.DataSource = dt2;
+            lvTopProducts.DataBind();
+            
         }
 
         private void loadCategories()
         {
-            DataTable dt = getCategoryImages();
-
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                dt.Rows[i]["image"] = dt.Rows[i]["image"].ToString().Remove(0, 1);
-            }
-
+            DataTable dt = getCategory();
             lvCategories.DataSource = dt;
             lvCategories.DataBind();
-
         }
 
         protected string getActiveClass(int index)
@@ -88,13 +80,32 @@ namespace MWM_Assignment
             return dt;
         }
 
-        private DataTable getCategoryImages()
+        private DataTable getTopProducts()
         {
             // Open Connection
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
 
-            string query = "select p.cid, min(image) as 'image',  min(c.name) as 'name', min(c.description) as 'description' from tblProducts p inner join tblCategory c on p.cid = c.cid where c.active = 1 group by p.cid";
+            // Query
+            string query = "select top(4) o.pid, p.name, p.image, p.price, sum(qty) as 'qtysold' from tblProducts p inner join tblOrders o on p.pid = o.pid where o.status != 'Cancelled' group by o.pid, p.name, p.image, p.price order by sum(qty) desc";
+
+            // SQL Command
+            SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            conn.Close();
+            return dt;
+        }
+
+        private DataTable getCategory()
+        {
+            // Open Connection
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+
+            string query = "select * from tblcategory where active = 1";
 
             // SQL Command
             SqlDataAdapter adapter = new SqlDataAdapter(query, conn);

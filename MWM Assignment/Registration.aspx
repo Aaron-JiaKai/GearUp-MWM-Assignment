@@ -19,15 +19,26 @@
                         </div>
                     </div>
                     <div class="col-12 col-md">
-                        <!-- Name input -->
-                        <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="John Doe" style="min-width:100%" />
-                            <asp:Label runat="server" ID="lblName" AssociatedControlID="txtName" CssClass="form-label" Text="Name" />
+                        <div class="row">
+                            <div class="col-12 col-md">
+                                <!-- Name input -->
+                                <div class="form-floating mb-3">
+                                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="John Doe" Style="min-width: 100%" />
+                                    <asp:Label runat="server" ID="lblName" AssociatedControlID="txtName" CssClass="form-label" Text="Name" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-md">
+                                <!-- Contact input -->
+                                <div class="form-floating mb-3">
+                                    <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" placeholder="012-34567890" Style="min-width: 100%" />
+                                    <asp:Label runat="server" ID="lblPhone" AssociatedControlID="txtPhone" CssClass="form-label" Text="Contact" />
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Address input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder=" " Style="height: 8rem; min-width: 100%"  />
+                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder=" " Style="height: 8rem; min-width: 100%" />
                             <asp:Label runat="server" ID="lblAddress" AssociatedControlID="txtName" CssClass="form-label" Text="Address" />
                         </div>
                     </div>
@@ -38,7 +49,7 @@
                     <div class="col-12">
                         <!-- Email input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" autocomplete="off" placeholder="example@example.com" style="min-width:100%"/>
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" autocomplete="off" placeholder="example@example.com" Style="min-width: 100%" />
                             <asp:Label runat="server" ID="lblEmail" AssociatedControlID="txtEmail" CssClass="form-label" Text="Email Address" />
                         </div>
 
@@ -46,14 +57,14 @@
                     <div class="col-12 col-md-6">
                         <!-- Password input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Enter password" style="min-width:100%"/>
+                            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Enter password" Style="min-width: 100%" />
                             <asp:Label runat="server" ID="lblPassword" AssociatedControlID="txtPassword" CssClass="form-label" Text="Password" />
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <!-- Confirm Password input -->
                         <div class="form-floating mb-3">
-                            <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Confirm password" style="min-width:100%"/>
+                            <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" TextMode="Password" autocomplete="off" placeholder="Confirm password" Style="min-width: 100%" />
                             <asp:Label runat="server" ID="lblConfirmPassword" AssociatedControlID="txtPassword" CssClass="form-label" Text="Enter your Password again" />
                         </div>
                     </div>
