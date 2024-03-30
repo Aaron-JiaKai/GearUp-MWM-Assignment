@@ -40,11 +40,11 @@
                     <ItemTemplate>
                         <div class="col-lg-3 col-6">
                             <a href="ProductCatalog.aspx?cid=<%# Eval("cid") %>">
-                                <div class="card m-1 bg-white text-dark cards">
+                                <div class="card m-1 bg-white cards">
                                     <img src='<%# Eval("image") %>' runat="server" class="card-img category-image-fit" alt='<%# Eval("name") %>'>
                                     <div class="card-img-overlay">
-                                        <h5 class="card-title"><%# Eval("name") %></h5>
-                                        <p class="card-text"><%# Eval("description") %></p>
+                                        <h5 class="card-title card-text-shadow"><%# Eval("name") %></h5>
+                                        <p class="card-text card-text-shadow"><%# Eval("description") %></p>
                                     </div>
                                 </div>
                             </a>
@@ -53,6 +53,8 @@
                 </asp:ListView>
             </div>
         </div>
+
+        <%--Best Sellers--%>
         <div class="container mb-5">
             <div class="row">
                 <h3 class="text-secondary">BEST SELLERS</h3>
@@ -63,7 +65,7 @@
                     <ItemTemplate>
                         <div class="col-lg-3 col-6">
                             <a href="ProductDetails.aspx?pid=<%# Eval("pid") %>">
-                                <div class="card m-1 bg-white text-dark cards">
+                                <div class="card m-1 bg-white cards">
                                     <img runat="server" src='<%# Eval("image") %>' class="card-img category-image-fit" alt='<%# Eval("name") %>'>
                                     <div class="card-img-overlay d-flex flex-column justify-content-between align-items-start">
                                         <h5 class="card-title"><%# Eval("name") %></h5>

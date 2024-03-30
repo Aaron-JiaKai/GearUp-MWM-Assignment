@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container">
-        <div class="px-5 pt-3 bg-white rounded shadow-sm mb-3">
+        <div class="px-5 pt-3 mb-3">
             <div class="row mb-3">
                 <h1 class="fw-bold mb-3">Order Details</h1>
             </div>

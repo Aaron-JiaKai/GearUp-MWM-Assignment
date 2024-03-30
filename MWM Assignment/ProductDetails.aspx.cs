@@ -16,6 +16,11 @@ namespace MWM_Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString["pid"] != null)
+            {
+                Session["pid"] = Request.QueryString["pid"];
+            }
+
             if (Session["pid"] != null)
             {
                 int pid = int.Parse(Session["pid"].ToString());

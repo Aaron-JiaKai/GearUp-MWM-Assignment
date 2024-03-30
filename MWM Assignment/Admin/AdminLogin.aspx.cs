@@ -1,16 +1,16 @@
-﻿using Microsoft.Ajax.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MWM_Assignment
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class AdminLogin : System.Web.UI.Page
     {
         private readonly string strConn = ConfigurationManager.ConnectionStrings["GearUpDB"].ConnectionString;
 
@@ -21,8 +21,8 @@ namespace MWM_Assignment
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            
-            if (txtEmail.Text == string.Empty || txtPassword.Text == string.Empty)
+
+            if (txtUsername.Text == string.Empty || txtPassword.Text == string.Empty)
             {
                 setStatus(false, "One or more fields are empty!");
                 return;
@@ -31,7 +31,7 @@ namespace MWM_Assignment
             if (login())
             {
                 setStatus(true, "Login Successful! Welcome back.");
-                Response.Redirect("Default.aspx");
+                Response.Redirect("~/Admin/ManageUsers.aspx");
             }
             else
             {
@@ -44,19 +44,20 @@ namespace MWM_Assignment
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
 
-            string query = "SELECT * FROM tblCustomers WHERE email = @email AND password = @password";
+            string query = "SELECT * FROM tblAdmin WHERE username = @username AND password = @password AND active = 1";
 
             SqlCommand comm = new SqlCommand(query, conn);
-            comm.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
+            comm.Parameters.AddWithValue("@username", txtUsername.Text.Trim());
             comm.Parameters.AddWithValue("@password", EncodePasswordToBase64(txtPassword.Text.Trim()));
 
             SqlDataReader reader = comm.ExecuteReader();
 
             if (reader.Read())
             {
+                Session.RemoveAll();
+
                 Session["uid"] = reader["id"];
-                Session["name"] = reader["name"];
-                Session["profileImg"] = reader["profilePicture"];
+                Session["username"] = reader["username"];
 
                 reader.Close();
                 conn.Close();
@@ -114,6 +115,5 @@ namespace MWM_Assignment
             string result = new String(decoded_char);
             return result;
         }
-
     }
 }

@@ -4,11 +4,11 @@
 
     <main aria-labelledby="title" class="container">
         <div class="justify-content-center align-items-center" style="min-height: 80vh;">
-            <div class="px-5 pt-3 mx-5 bg-white rounded shadow-sm">
-                <div class="row">
-                    <h1 class="fw-bold mb-3">Orders</h1>
+            <div class="row mt-5">
+                <div class="col">
+                    <h3 class="text-secondary">ORDERS</h3>
                 </div>
-                <div class="mb-3">
+                <div class="col">
                     <ul class="nav nav-pills justify-content-center justify-content-md-end" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="ship-tab" data-bs-toggle="tab" data-bs-target="#ship" type="button" role="tab" aria-controls="ship" aria-selected="true">To Ship</button>
@@ -25,6 +25,7 @@
                     </ul>
                 </div>
             </div>
+            <hr/>
             <div class="px-5 py-3">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="ship" role="tabpanel" aria-labelledby="ship-tab">

@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container">
-        <div class="justify-content-center align-items-center" style="min-height: 80vh">
+        <div class="justify-content-center align-items-center d-grid" style="min-height: 80vh">
             <div class="px-5 py-3 mx-5 bg-white rounded shadow-sm">
                 <div class="row mb-5">
                     <h1 class="fw-bold mb-3">Glad to have you onboard!</h1>
