@@ -25,6 +25,23 @@
     border-radius: 100px;
 }
 
+.profile-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 200px !important;
+    width: 200px !important;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 100px;
+}
+
+.profile-image-overlay:hover {
+    opacity: 1;
+}
+
 .profile-image-nav {
     height: 30px !important;
     width: 30px !important;
@@ -124,6 +141,8 @@
         background: #00000020;
         border-radius: 5px;
     }
+
+
 
 @media (max-width: 767px) {
     .carousel-size {

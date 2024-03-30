@@ -3,9 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container">
         <div class="px-5 py-3 bg-white rounded shadow-sm mb-3">
-            <div class="row mb-5">
-                <h1 class="fw-bold mb-3">Your Cart</h1>
+            <div class="row justify-content-between mb-5">
+                <div class="col ">
+                    <h1 class="fw-bold mb-3">Your Cart</h1>
+                </div>
             </div>
+
             <div class="align-items-center">
                 <asp:DataList ID="dlCart" runat="server" RepeatColumns="1" RepeatDirection="Vertical" Width="100%" OnItemCommand="dlCart_ItemCommand">
                     <HeaderTemplate>

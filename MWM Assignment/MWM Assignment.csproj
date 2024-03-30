@@ -104,6 +104,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Admin\ManageUsers.aspx" />
+    <Content Include="Admin\ManageCategories.aspx" />
     <Content Include="App_Data\GearUpDB.mdf" />
     <Content Include="App_Data\GearUpDB_log.ldf">
       <DependentUpon>GearUpDB.mdf</DependentUpon>
@@ -126,7 +127,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Css\adminStyles.css" />
+    <Content Include="Css\admin-sidebar.css" />
     <Content Include="Css\styles.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -218,6 +219,13 @@
     </Compile>
     <Compile Include="Admin\ManageUsers.aspx.designer.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ManageCategories.aspx.cs">
+      <DependentUpon>ManageCategories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ManageCategories.aspx.designer.cs">
+      <DependentUpon>ManageCategories.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

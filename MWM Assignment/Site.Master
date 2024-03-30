@@ -19,6 +19,7 @@
 
     <%--Css Stylesheet--%>
     <link href="Css/styles.css" rel="stylesheet" />
+
 </head>
 <body>
     <form runat="server">
@@ -99,7 +100,7 @@
                                 <li class="nav-item mb-2"><a href="~/ProductCatalog.aspx" runat="server" class="nav-link p-0 text-muted">Products</a></li>
                             </ul>
                         </div>
-
+                        
                         <div class="col mb-3">
                             <h5>Account</h5>
                             <ul class="nav flex-column">

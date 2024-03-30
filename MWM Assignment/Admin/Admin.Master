@@ -21,8 +21,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
     <%--Css Stylesheet--%>
-    <link href="Css/styles.css" rel="stylesheet" />
-    <link href="../Css/adminStyles.css" rel="stylesheet" />
+    <link href="../Css/styles.css" rel="stylesheet" />
+    <link href="../Css/admin-sidebar.css" rel="stylesheet" />
 </head>
 <body>
     <form runat="server">
@@ -53,19 +53,19 @@
                                 </g>
                             </svg>
                         </a>
-                        <a href="#" class="nav_link active">
+                        <a href="~/admin/ManageUsers.aspx" class="nav_link" runat="server" id="hUsers">
                             <i class='bi bi-person nav_icon'></i><span class="nav_name">Users</span>
                         </a>
-                        <a href="#" class="nav_link">
+                        <a href="~/admin/ManageCategories.aspx" class="nav_link" runat="server" id="hCategories">
                             <i class='bi bi-grid nav_icon'></i><span class="nav_name">Categories</span>
                         </a>
-                        <a href="#" class="nav_link">
+                        <a href="#" class="nav_link" runat="server" id="hProducts">
                             <i class='bi bi-pc-display nav_icon'></i><span class="nav_name">Products</span>
                         </a>
-                        <a href="#" class="nav_link">
+                        <a href="#" class="nav_link" runat="server" id="hOrders">
                             <i class='bi bi-bag nav_icon'></i><span class="nav_name">Orders</span>
                         </a>
-                        <a href="#" class="nav_link">
+                        <a href="#" class="nav_link" runat="server" id="hFeedbacks">
                             <i class='bi bi-chat-dots nav_icon'></i><span class="nav_name">Feedbacks</span>
                         </a>
                     </div>

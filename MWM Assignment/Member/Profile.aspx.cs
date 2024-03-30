@@ -178,17 +178,17 @@ namespace MWM_Assignment
 
                 foreach (string file in files)
                 {
-                    if (Path.GetFileNameWithoutExtension(file) == Session["name"].ToString())
+                    if (Path.GetFileNameWithoutExtension(file) == txtEmail.Text.ToString())
                     {
                         System.IO.File.Delete(file);
                     }
                 }
 
-                string filePath = Server.MapPath("~//Images//Profile//" + txtName.Text + ext);
+                string filePath = Server.MapPath("~//Images//Profile//" + txtEmail.Text + ext);
 
                 fuProfile.SaveAs(filePath);
 
-                fileUrl = "~/Images/Profile/" + txtName.Text + ext;
+                fileUrl = "~/Images/Profile/" + txtEmail.Text + ext;
             }
             else
             {

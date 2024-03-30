@@ -44,7 +44,7 @@ namespace MWM_Assignment
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
 
-            string query = "SELECT * FROM tblCustomers WHERE email = @email AND password = @password";
+            string query = "SELECT * FROM tblCustomers WHERE email = @email AND password = @password and active = 1";
 
             SqlCommand comm = new SqlCommand(query, conn);
             comm.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
