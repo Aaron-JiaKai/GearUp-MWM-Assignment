@@ -4,7 +4,13 @@
 
     <div class="mx-5 p-5">
         <div class="row">
-            <h3 class="text-secondary">MANAGE CATEGORIES</h3>
+            <div class="col">
+                <h3 class="text-secondary">MANAGE CATEGORIES</h3>
+            </div>
+            <div class="col text-end">
+                <asp:Button runat="server" ID="btnShowCreate" Text="Create New Category" CssClass="btn btn-primary" OnClick="btnShowCreate_Click" />
+                <asp:Button runat="server" Visible="false" ID="btnCancelCreate" Text="Cancel" CssClass="btn btn-danger" OnClick="btnCancelCreate_Click" />
+            </div>
         </div>
         <hr />
 
@@ -29,7 +35,8 @@
             </div>
             <div class="row mb-5">
                 <div class="col text-center">
-                    <asp:Button runat="server" ID="btnUpdate" Text="Update Category" CssClass="btn btn-primary btn-lg" OnClick="btnUpdate_Click" />
+                    <asp:Button runat="server" Visible="false" ID="btnCreate" Text="Save Category" CssClass="btn btn-primary btn-lg" OnClick="btnCreate_Click" />
+                    <asp:Button runat="server" Visible="false" ID="btnUpdate" Text="Update Category" CssClass="btn btn-primary btn-lg" OnClick="btnUpdate_Click" />
                 </div>
             </div>
         </div>

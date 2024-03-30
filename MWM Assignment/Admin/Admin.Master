@@ -59,7 +59,7 @@
                         <a href="~/admin/ManageCategories.aspx" class="nav_link" runat="server" id="hCategories">
                             <i class='bi bi-grid nav_icon'></i><span class="nav_name">Categories</span>
                         </a>
-                        <a href="#" class="nav_link" runat="server" id="hProducts">
+                        <a href="~/admin/ManageProducts.aspx" class="nav_link" runat="server" id="hProducts">
                             <i class='bi bi-pc-display nav_icon'></i><span class="nav_name">Products</span>
                         </a>
                         <a href="#" class="nav_link" runat="server" id="hOrders">

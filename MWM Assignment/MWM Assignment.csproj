@@ -105,6 +105,7 @@
     <Content Include="About.aspx" />
     <Content Include="Admin\ManageUsers.aspx" />
     <Content Include="Admin\ManageCategories.aspx" />
+    <Content Include="Admin\ManageProducts.aspx" />
     <Content Include="App_Data\GearUpDB.mdf" />
     <Content Include="App_Data\GearUpDB_log.ldf">
       <DependentUpon>GearUpDB.mdf</DependentUpon>
@@ -226,6 +227,13 @@
     </Compile>
     <Compile Include="Admin\ManageCategories.aspx.designer.cs">
       <DependentUpon>ManageCategories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ManageProducts.aspx.cs">
+      <DependentUpon>ManageProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ManageProducts.aspx.designer.cs">
+      <DependentUpon>ManageProducts.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

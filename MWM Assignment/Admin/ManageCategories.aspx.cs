@@ -28,7 +28,7 @@ namespace MWM_Assignment.Admin
 
         private void populateTable()
         {
-            //divUserDetails.Visible = false;
+            divCategoryDetails.Visible = false;
 
             DataTable categories = getCategories();
 
@@ -75,7 +75,12 @@ namespace MWM_Assignment.Admin
             switch (e.CommandName)
             {
                 case "updateCategory":
-                    populateUserDetails(cid);
+                    btnUpdate.Visible = true;
+                    btnCancelCreate.Visible = true;
+                    btnShowCreate.Visible = false;
+                    btnCreate.Visible = false;
+
+                    populateCategoryDetails(cid);
                     divCategoryDetails.Visible = true;
                     break;
                 case "deleteCategory":
@@ -162,7 +167,7 @@ namespace MWM_Assignment.Admin
             }
         }
 
-        private void populateUserDetails(string cid)
+        private void populateCategoryDetails(string cid)
         {
             DataTable dt = getCategory(cid);
 
@@ -198,11 +203,11 @@ namespace MWM_Assignment.Admin
 
             if (uid == string.Empty) return;
 
-            updateUser(uid);
+            updateCategory(uid);
             populateTable();
         }
 
-        private void updateUser(string cid)
+        private void updateCategory(string cid)
         {
             // Open Connection
             SqlConnection conn = new SqlConnection(strConn);
@@ -247,7 +252,7 @@ namespace MWM_Assignment.Admin
             }
         }
 
-        string updateImage()
+        private string updateImage()
         {
             string fileUrl;
 
@@ -282,6 +287,60 @@ namespace MWM_Assignment.Admin
             }
 
             return fileUrl;
+        }
+
+        protected void btnCreate_Click(object sender, EventArgs e)
+        {
+            if (createCategory())
+            {
+                setStatus(true, "Category created successully!");
+                divCategoryDetails.Visible = false;
+                btnCreate.Visible = false;
+            }
+        }
+
+        private bool createCategory()
+        {
+            string url = updateImage();
+
+            // Open Connection
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+
+            string query = "insert into tblCategory (name, image, dtAdded, active) values (@name, @image, GETDATE(), 1)";
+
+            SqlCommand comm = new SqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@name", txtName.Text.ToString().Trim());
+            comm.Parameters.AddWithValue("@image", url);
+
+            int result = comm.ExecuteNonQuery();
+            if (result > 0)
+            {
+                conn.Close();
+                return true;
+            }
+
+            conn.Close();
+            return false;
+        }
+
+        protected void btnShowCreate_Click(object sender, EventArgs e)
+        {
+            btnShowCreate.Visible = false;
+            divCategoryDetails.Visible = true;
+            btnCreate.Visible = true;
+            btnCancelCreate.Visible = true;
+        }
+
+        protected void btnCancelCreate_Click(object sender, EventArgs e)
+        {
+            divCategoryDetails.Visible = false;
+
+            btnShowCreate.Visible = true;
+            btnCancelCreate.Visible = false;
+            btnCreate.Visible = false;
+
+            btnUpdate.Visible = false;
         }
     }
 }
