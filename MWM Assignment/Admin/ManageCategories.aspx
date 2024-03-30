@@ -9,7 +9,7 @@
             </div>
             <div class="col text-end">
                 <asp:Button runat="server" ID="btnShowCreate" Text="Create New Category" CssClass="btn btn-primary" OnClick="btnShowCreate_Click" />
-                <asp:Button runat="server" Visible="false" ID="btnCancelCreate" Text="Cancel" CssClass="btn btn-danger" OnClick="btnCancelCreate_Click" />
+                <asp:Button runat="server" Visible="false" ID="btnCancel" Text="Cancel" CssClass="btn btn-danger" OnClick="btnCancel_Click" />
             </div>
         </div>
         <hr />

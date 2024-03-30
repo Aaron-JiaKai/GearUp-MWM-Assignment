@@ -24,6 +24,7 @@ namespace MWM_Assignment.Admin
 
             if (!IsPostBack) populateTable();
 
+            btnCancel.Visible = false;
         }
 
         private void populateTable()
@@ -76,7 +77,7 @@ namespace MWM_Assignment.Admin
             {
                 case "updateCategory":
                     btnUpdate.Visible = true;
-                    btnCancelCreate.Visible = true;
+                    btnCancel.Visible = true;
                     btnShowCreate.Visible = false;
                     btnCreate.Visible = false;
 
@@ -329,15 +330,15 @@ namespace MWM_Assignment.Admin
             btnShowCreate.Visible = false;
             divCategoryDetails.Visible = true;
             btnCreate.Visible = true;
-            btnCancelCreate.Visible = true;
+            btnCancel.Visible = true;
         }
 
-        protected void btnCancelCreate_Click(object sender, EventArgs e)
+        protected void btnCancel_Click(object sender, EventArgs e)
         {
             divCategoryDetails.Visible = false;
 
             btnShowCreate.Visible = true;
-            btnCancelCreate.Visible = false;
+            btnCancel.Visible = false;
             btnCreate.Visible = false;
 
             btnUpdate.Visible = false;

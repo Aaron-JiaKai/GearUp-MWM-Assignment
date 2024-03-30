@@ -11,6 +11,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
+using System.Security.Cryptography;
 
 namespace MWM_Assignment.Admin
 {
@@ -24,18 +25,32 @@ namespace MWM_Assignment.Admin
             HtmlAnchor anchor = (HtmlAnchor)masterPage.FindControl("hProducts");
             anchor.Attributes["class"] = "nav_link active";
 
-            if (!IsPostBack) populateTable();
+            if (!IsPostBack)
+            {
+                populateTable();
+                populateCategory();
+            }
+
+            btnCancel.Visible = false;
 
         }
 
         private void populateTable()
         {
             divProductDetails.Visible = false;
-
             DataTable dt = getProducts();
-
             lvProduct.DataSource = dt;
             lvProduct.DataBind();
+        }
+
+        private void populateCategory()
+        {
+            DataTable dt = getCategories();
+            ddlCategory.DataSource = dt;
+            ddlCategory.DataValueField = "cid";
+            ddlCategory.DataTextField = "name";
+
+            ddlCategory.DataBind();
         }
 
         private DataTable getProducts()
@@ -68,7 +83,7 @@ namespace MWM_Assignment.Admin
 
             if (pid == string.Empty)
             {
-                setStatus(false, "An error occurred: User ID not found!");
+                setStatus(false, "An error occurred: Product ID not found!");
                 return;
             }
 
@@ -77,6 +92,12 @@ namespace MWM_Assignment.Admin
             switch (e.CommandName)
             {
                 case "updateProduct":
+
+                    btnUpdate.Visible = true;
+                    btnCancel.Visible = true;
+                    btnShowCreate.Visible = false;
+                    btnCreate.Visible = false;
+
                     populateUserDetails(pid);
                     divProductDetails.Visible = true;
                     break;
@@ -123,7 +144,7 @@ namespace MWM_Assignment.Admin
                     comm.ExecuteNonQuery();
 
                     transaction.Commit();
-                    setStatus(true, "Account has been deactivated");
+                    setStatus(true, "Product has been deactivated");
                     populateTable();
                 }
                 catch (Exception e)
@@ -152,7 +173,7 @@ namespace MWM_Assignment.Admin
                     comm.ExecuteNonQuery();
 
                     transaction.Commit();
-                    setStatus(true, "Account has been reactivated!");
+                    setStatus(true, "Product has been reactivated!");
                     populateTable();
                 }
                 catch (Exception e)
@@ -171,7 +192,10 @@ namespace MWM_Assignment.Admin
             if (dt.Rows.Count > 0)
             {
                 txtName.Text = dt.Rows[0]["name"].ToString().Trim();
+                txtDescription.Text = dt.Rows[0]["description"].ToString().Trim();
+                txtPrice.Text = string.Format("{0:C}", dt.Rows[0]["price"].ToString().Trim());
                 productImage.Attributes["src"] = dt.Rows[0]["image"].ToString().Trim();
+                ddlCategory.SelectedValue = dt.Rows[0]["cid"].ToString().Trim();
             }
         }
 
@@ -180,7 +204,7 @@ namespace MWM_Assignment.Admin
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
 
-            string query = "SELECT *, c.name as 'catName' FROM tblProducts p INNER JOIN tblProducts c ON p.cid = c.cid WHERE pid = @pid";
+            string query = "SELECT *, p.name as 'prodName', c.name as 'catName' FROM tblProducts p INNER JOIN tblCategory c ON p.cid = c.cid WHERE pid = @pid";
 
             SqlCommand comm = new SqlCommand(query, conn);
             comm.Parameters.AddWithValue("pid", pid);
@@ -194,13 +218,29 @@ namespace MWM_Assignment.Admin
             return dt;
         }
 
+        private DataTable getCategories()
+        {
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+
+            string query = "SELECT * FROM tblCategory WHERE active = 1";
+
+            SqlDataAdapter da = new SqlDataAdapter(query, conn);
+
+            DataTable dt = new DataTable();
+
+            da.Fill(dt);
+
+            return dt;
+        }
+
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            string uid = hfUid.Value.ToString();
+            string pid = hfUid.Value.ToString();
 
-            if (uid == string.Empty) return;
+            if (pid == string.Empty) return;
 
-            updateProduct(uid);
+            updateProduct(pid);
             populateTable();
         }
 
@@ -225,7 +265,40 @@ namespace MWM_Assignment.Admin
                         comm.ExecuteNonQuery();
                     }
 
-                    if (fuProduct.HasFile)
+                    if (txtDescription.Text != "")
+                    {
+                        // Query
+                        string query = "UPDATE tblProducts SET description = @description WHERE pid=@pid";
+                        SqlCommand comm = new SqlCommand(query, conn, transaction);
+                        comm.Parameters.AddWithValue("@description", txtDescription.Text.Trim());
+                        comm.Parameters.AddWithValue("@pid", pid);
+
+                        comm.ExecuteNonQuery();
+                    }
+
+                    if (txtPrice.Text != "")
+                    {
+                        // Query
+                        string query = "UPDATE tblProducts SET price = @price WHERE pid=@pid";
+                        SqlCommand comm = new SqlCommand(query, conn, transaction);
+                        comm.Parameters.AddWithValue("@price", txtPrice.Text.Trim());
+                        comm.Parameters.AddWithValue("@pid", pid);
+
+                        comm.ExecuteNonQuery();
+                    }
+
+                    if (ddlCategory.SelectedItem != null)
+                    {
+                        // Query
+                        string query = "UPDATE tblProducts SET cid = @cid WHERE pid=@pid";
+                        SqlCommand comm = new SqlCommand(query, conn, transaction);
+                        comm.Parameters.AddWithValue("@cid", ddlCategory.SelectedValue);
+                        comm.Parameters.AddWithValue("@pid", pid);
+
+                        comm.ExecuteNonQuery();
+                    }
+
+                    if (fuImage.HasFile)
                     {
                         string url = updateImage();
                         string query = "UPDATE tblProducts SET image = @image WHERE pid=@pid";
@@ -253,11 +326,11 @@ namespace MWM_Assignment.Admin
         {
             string fileUrl;
 
-            if (fuProduct.HasFile)
+            if (fuImage.HasFile)
             {
-                string ext = Path.GetExtension(fuProduct.FileName);
+                string ext = Path.GetExtension(fuImage.FileName);
 
-                string directory = Server.MapPath("~//Images//Category//");
+                string directory = Server.MapPath("~//Images//"+ ddlCategory.SelectedItem.Text +"//");
                 if (!System.IO.Directory.Exists(directory))
                 {
                     System.IO.Directory.CreateDirectory(directory);
@@ -272,11 +345,11 @@ namespace MWM_Assignment.Admin
                     }
                 }
 
-                string filePath = Server.MapPath("~//Images//Category//" + txtName.Text + ext);
+                string filePath = Server.MapPath("~//Images//" + ddlCategory.SelectedItem.Text + "//" + txtName.Text + ext);
 
-                fuProduct.SaveAs(filePath);
+                fuImage.SaveAs(filePath);
 
-                fileUrl = "~/Images/Category/" + txtName.Text + ext;
+                fileUrl = "~/Images/" + ddlCategory.SelectedItem.Text + "/" + txtName.Text + ext;
             }
             else
             {
@@ -284,6 +357,61 @@ namespace MWM_Assignment.Admin
             }
 
             return fileUrl;
+        }
+
+        protected void btnShowCreate_Click(object sender, EventArgs e)
+        {
+            btnShowCreate.Visible = false;
+            divProductDetails.Visible = true;
+            btnCreate.Visible = true;
+            btnCancel.Visible = true;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            divProductDetails.Visible = false;
+            btnShowCreate.Visible = true;
+            btnCancel.Visible = false;
+            btnCreate.Visible = false;
+            btnUpdate.Visible = false;
+        }
+
+        private bool createCategory()
+        {
+            string url = updateImage();
+
+            // Open Connection
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+
+            string query = "insert into tblProducts (name, description, price, image, cid, dtAdded, active) values (@name, @description, @price, @image, @cid, GETDATE(), 1)";
+
+            SqlCommand comm = new SqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@name", txtName.Text.ToString().Trim());
+            comm.Parameters.AddWithValue("@description", txtDescription.Text.ToString());
+            comm.Parameters.AddWithValue("@price", txtPrice.Text.ToString().Trim());
+            comm.Parameters.AddWithValue("@image", url);
+            comm.Parameters.AddWithValue("@cid", ddlCategory.SelectedValue);
+
+            int result = comm.ExecuteNonQuery();
+            if (result > 0)
+            {
+                conn.Close();
+                return true;
+            }
+
+            conn.Close();
+            return false;
+        }
+
+        protected void btnCreate_Click(object sender, EventArgs e)
+        {
+            if (createCategory())
+            {
+                setStatus(true, "Category created successully!");
+                divProductDetails.Visible = false;
+                btnCreate.Visible = false;
+            }
         }
     }
 }
