@@ -44,7 +44,6 @@
                                     <img src='<%# Eval("image") %>' runat="server" class="card-img category-image-fit" alt='<%# Eval("name") %>'>
                                     <div class="card-img-overlay">
                                         <h5 class="card-title card-text-shadow"><%# Eval("name") %></h5>
-                                        <p class="card-text card-text-shadow"><%# Eval("description") %></p>
                                     </div>
                                 </div>
                             </a>

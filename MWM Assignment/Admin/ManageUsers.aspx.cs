@@ -21,11 +21,14 @@ namespace MWM_Assignment.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            MasterPage masterPage = (MasterPage) this.Master;
-            HtmlAnchor anchor = (HtmlAnchor) masterPage.FindControl("hUsers");
+            MasterPage masterPage = (MasterPage)this.Master;
+            HtmlAnchor anchor = (HtmlAnchor)masterPage.FindControl("hUsers");
             anchor.Attributes["class"] = "nav_link active";
 
-            if (!IsPostBack) populateTable();
+            if (!IsPostBack)
+            {
+                populateTable();
+            }
         }
 
         private void populateTable()
@@ -299,11 +302,16 @@ namespace MWM_Assignment.Admin
             }
             else
             {
-                fileUrl = "~/Images/Placeholder/placeholder-user";
+                fileUrl = "~/Images/Placeholder/placeholder-user.jpg";
             }
 
             return fileUrl;
         }
 
+        protected void lvUser_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            (lvUser.FindControl("dpUser") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            this.populateTable();
+        }
     }
 }

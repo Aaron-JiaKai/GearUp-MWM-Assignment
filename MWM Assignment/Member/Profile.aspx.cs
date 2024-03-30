@@ -192,7 +192,7 @@ namespace MWM_Assignment
             }
             else
             {
-                fileUrl = "~/Images/Placeholder/placeholder-user";
+                fileUrl = "~/Images/Placeholder/placeholder-user.jpg";
             }
 
             return fileUrl;

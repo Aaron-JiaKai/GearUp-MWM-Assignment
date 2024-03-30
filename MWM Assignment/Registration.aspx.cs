@@ -53,13 +53,13 @@ namespace MWM_Assignment
                     System.IO.Directory.CreateDirectory(path);
                 }
 
-                fuProfile.SaveAs(Server.MapPath("~//Images//Profile//" + txtName.Text + ext));
+                fuProfile.SaveAs(Server.MapPath("~//Images//Profile//" + txtEmail.Text + ext));
                 fileUrl = "~/Images/Profile/" + txtName.Text + ext;
 
             }
             else
             {
-                fileUrl = "~/Images/Placeholder/placeholder-user";
+                fileUrl = "~/Images/Placeholder/placeholder-user.jpg";
             }
 
             return fileUrl;

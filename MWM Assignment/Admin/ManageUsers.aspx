@@ -66,7 +66,7 @@
         </div>
 
         <div class="mb-5">
-            <asp:ListView ID="lvUser" runat="server" DataKeyNames="ID" OnItemCommand="lvUser_ItemCommand">
+            <asp:ListView ID="lvUser" runat="server" DataKeyNames="ID" OnItemCommand="lvUser_ItemCommand" OnPagePropertiesChanging="lvUser_PagePropertiesChanging">
                 <LayoutTemplate>
                     <table class="table table-hover table-responsive">
                         <thead>
@@ -88,7 +88,7 @@
                                 <td colspan="7" style="text-align: end">
                                     <asp:DataPager runat="server" ID="dpUser" PagedControlID="lvUser" PageSize="10">
                                         <Fields>
-                                            <asp:NumericPagerField ButtonType="Button" NextPreviousButtonCssClass="btn btn-secondary" CurrentPageLabelCssClass="btn btn-secondary" />
+                                            <asp:NumericPagerField ButtonType="Button" CurrentPageLabelCssClass="btn btn-secondary" />
                                         </Fields>
                                     </asp:DataPager>
                                 </td>

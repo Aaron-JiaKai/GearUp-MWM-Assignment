@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="Product Details Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProductDetails.aspx.cs" Inherits="MWM_Assignment.ProductDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <main aria-labelledby="title" class="container">
-        <div class="row">
-            <h1 class="fw-bold text-center">Product Details</h1>
+    <main aria-labelledby="title" class="container" style="min-height: 60vh;">
+        <div class="row g-0 my-3">
+            <h3 class="text-secondary">PRODUCT DETAILS</h3>
+            <hr />
         </div>
-        <hr />
         <div class="row justify-content-center my-5">
             <div class="col-12 col-md-6">
                 <asp:Image CssClass="img-fluid rounded" runat="server" ID="img_Image" ImageUrl="https://placehold.co/600x400" Style="height: 400px; width: 100%; object-fit: contain" />
@@ -24,7 +24,7 @@
                             </div>
                             <hr />
                             <div class="row">
-                                <asp:Label runat="server" ID="lblDescription" Text="Placeholder"/>
+                                <asp:Label runat="server" ID="lblDescription" Text="Placeholder" />
                             </div>
                         </div>
                     </div>
