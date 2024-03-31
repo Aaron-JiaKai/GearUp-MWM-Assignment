@@ -36,7 +36,7 @@ namespace MWM_Assignment
         private void loadProduct(int pid)
         {
             // Open Connection
-            
+
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
 
@@ -52,7 +52,7 @@ namespace MWM_Assignment
             if (reader.Read())
             {
                 lblName.Text = reader["name"].ToString();
-                lblDescription.Text = reader["description"].ToString();
+                lblDescription.Text = HttpUtility.HtmlDecode(reader["description"].ToString());
                 lblPrice.Text = string.Format("{0:C}", reader["price"]);
                 img_Image.ImageUrl = reader["image"].ToString();
             }

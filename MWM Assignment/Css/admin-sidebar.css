@@ -75,7 +75,7 @@ a {
     z-index: var(--z-fixed)
 }
 
-.nav {
+.nav-side {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -120,7 +120,7 @@ a {
     font-size: 1.25rem
 }
 
-.show {
+.nav-show {
     left: 0
 }
 
@@ -186,7 +186,7 @@ a {
         padding: 1rem 1rem 0 0
     }
 
-    .show {
+    .nav-show {
         width: calc(var(--nav-width) + 156px)
     }
 

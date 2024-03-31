@@ -379,6 +379,8 @@
             document.getElementById("<%= hfOid.ClientID %>").value = orderRef
 
             document.getElementById("modalbodycontent").innerText = "Are you sure you want to cancel this order? This cannot be undone!"
+
+
             document.getElementById("modalbodycontent").attributes["button-mode"] = "cancel"
         }
 

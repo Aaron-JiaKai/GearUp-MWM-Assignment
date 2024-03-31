@@ -46,11 +46,13 @@ namespace MWM_Assignment.Admin
         private void populateCategory()
         {
             DataTable dt = getCategories();
+
             ddlCategory.DataSource = dt;
             ddlCategory.DataValueField = "cid";
             ddlCategory.DataTextField = "name";
 
             ddlCategory.DataBind();
+
         }
 
         private DataTable getProducts()
@@ -192,7 +194,7 @@ namespace MWM_Assignment.Admin
             if (dt.Rows.Count > 0)
             {
                 txtName.Text = dt.Rows[0]["name"].ToString().Trim();
-                txtDescription.Text = dt.Rows[0]["description"].ToString().Trim();
+                txtDescription.Text = HttpUtility.HtmlDecode(dt.Rows[0]["description"].ToString());
                 txtPrice.Text = string.Format("{0:C}", dt.Rows[0]["price"].ToString().Trim());
                 productImage.Attributes["src"] = dt.Rows[0]["image"].ToString().Trim();
                 ddlCategory.SelectedValue = dt.Rows[0]["cid"].ToString().Trim();
@@ -270,7 +272,7 @@ namespace MWM_Assignment.Admin
                         // Query
                         string query = "UPDATE tblProducts SET description = @description WHERE pid=@pid";
                         SqlCommand comm = new SqlCommand(query, conn, transaction);
-                        comm.Parameters.AddWithValue("@description", txtDescription.Text.Trim());
+                        comm.Parameters.AddWithValue("@description", HttpUtility.HtmlEncode(txtDescription.Text));
                         comm.Parameters.AddWithValue("@pid", pid);
 
                         comm.ExecuteNonQuery();
@@ -330,7 +332,7 @@ namespace MWM_Assignment.Admin
             {
                 string ext = Path.GetExtension(fuImage.FileName);
 
-                string directory = Server.MapPath("~//Images//"+ ddlCategory.SelectedItem.Text +"//");
+                string directory = Server.MapPath("~//Images//" + ddlCategory.SelectedItem.Text + "//");
                 if (!System.IO.Directory.Exists(directory))
                 {
                     System.IO.Directory.CreateDirectory(directory);
@@ -413,5 +415,6 @@ namespace MWM_Assignment.Admin
                 btnCreate.Visible = false;
             }
         }
+
     }
 }
