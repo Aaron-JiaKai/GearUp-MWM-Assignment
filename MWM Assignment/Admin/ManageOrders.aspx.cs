@@ -54,11 +54,6 @@ namespace MWM_Assignment.Admin
             }
         }
 
-        protected void lvOrder_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-
-        }
-
         protected void lvOrder_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
         {
             (lvOrder.FindControl("dpOrder") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
@@ -86,11 +81,11 @@ namespace MWM_Assignment.Admin
 
             string status = statusDictionary[statusCd];
 
-            string query = "select distinct oid, name, address, contact, status from tblOrders where status = @status";
+            string query = "select distinct oid, name, address, contact, status from tblOrders where status like @status";
 
             // SQL Command
             SqlCommand comm = new SqlCommand(query, conn);
-            comm.Parameters.AddWithValue("@status", status);
+            comm.Parameters.AddWithValue("@status", "%" + status + "%");
 
             SqlDataAdapter da = new SqlDataAdapter(comm);
             DataTable dt = new DataTable();

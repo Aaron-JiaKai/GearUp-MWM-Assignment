@@ -54,10 +54,8 @@ namespace MWM_Assignment
 
             if (reader.Read())
             {
-                Session.RemoveAll();
-
-                Session["uid"] = reader["id"];
-                Session["username"] = reader["username"];
+                Session["admin"] = reader["id"];
+                Session["adminName"] = reader["username"];
 
                 reader.Close();
                 conn.Close();

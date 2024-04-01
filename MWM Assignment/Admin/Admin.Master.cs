@@ -11,12 +11,12 @@ namespace MWM_Assignment.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["uid"] == null)
+            if (Session["admin"] == null)
             {
                 Response.Redirect("~/Admin/AdminLogin.aspx");
             }
 
-            string username = Session["username"].ToString();
+            string username = Session["adminName"].ToString();
             lblGreetings.Text = ("Welcome back, " + username + "!").ToUpper();
         }
 

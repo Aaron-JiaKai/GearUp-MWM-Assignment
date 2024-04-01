@@ -96,6 +96,24 @@ namespace MWM_Assignment
         protected global::System.Web.UI.WebControls.HiddenField hfOid;
 
         /// <summary>
+        /// hfMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfMode;
+
+        /// <summary>
+        /// hfRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfRating;
+
+        /// <summary>
         /// orderRefModal control.
         /// </summary>
         /// <remarks>
@@ -103,6 +121,15 @@ namespace MWM_Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label orderRefModal;
+
+        /// <summary>
+        /// txtReviewDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReviewDesc;
 
         /// <summary>
         /// divStatus control.

@@ -65,7 +65,7 @@
                         <a href="~/admin/ManageOrders.aspx" class="nav_link" runat="server" id="hOrders">
                             <i class='bi bi-bag nav_icon'></i><span class="nav_name">Orders</span>
                         </a>
-                        <a href="#" class="nav_link" runat="server" id="hFeedbacks">
+                        <a href="~/admin/ManageFeedback.aspx" class="nav_link" runat="server" id="hFeedbacks">
                             <i class='bi bi-chat-dots nav_icon'></i><span class="nav_name">Feedbacks</span>
                         </a>
                     </div>

@@ -42,6 +42,15 @@ namespace MWM_Assignment
         protected global::System.Web.UI.WebControls.Label lblPrice;
 
         /// <summary>
+        /// lblAvgRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAvgRating;
+
+        /// <summary>
         /// lblQuantity control.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,15 @@ namespace MWM_Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDescription;
+
+        /// <summary>
+        /// dlReview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList dlReview;
 
         /// <summary>
         /// divStatus control.

@@ -67,7 +67,7 @@ namespace MWM_Assignment.Admin
 
             if (cid == string.Empty)
             {
-                setStatus(false, "An error occurred: User ID not found!");
+                setStatus(false, "An error occurred: Category ID not found!");
                 return;
             }
 
@@ -127,7 +127,7 @@ namespace MWM_Assignment.Admin
                     comm.ExecuteNonQuery();
 
                     transaction.Commit();
-                    setStatus(true, "Account has been deactivated");
+                    setStatus(true, "Category has been deactivated");
                     populateTable();
                 }
                 catch (Exception e)
@@ -156,7 +156,7 @@ namespace MWM_Assignment.Admin
                     comm.ExecuteNonQuery();
 
                     transaction.Commit();
-                    setStatus(true, "Account has been reactivated!");
+                    setStatus(true, "Category has been reactivated!");
                     populateTable();
                 }
                 catch (Exception e)
@@ -241,7 +241,7 @@ namespace MWM_Assignment.Admin
                     }
 
                     transaction.Commit();
-                    setStatus(true, "User Details has been updated successfully!");
+                    setStatus(true, "Category Details has been updated successfully!");
                     conn.Close();
                 }
                 catch (Exception ex)

@@ -25,7 +25,7 @@
                     </ul>
                 </div>
             </div>
-            <hr/>
+            <hr />
             <div class="px-5 py-3">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="ship" role="tabpanel" aria-labelledby="ship-tab">
@@ -236,7 +236,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col text-end align-items-end">
-                                            <div class="row g-0">
+                                            <div class='row g-0 <%# checkReviewExist(Eval("oid").ToString()) ? "d-none": "" %>'>
                                                 <div class="col text-end">
                                                     <button type="button" id="modalButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalStatic" onclick="getDeliveredOrderRef(<%# Container.ItemIndex.ToString() %>)">Rate</button>
                                                 </div>
@@ -329,6 +329,8 @@
             <asp:Button runat="server" ID='btnRate' OnClick="btnRate_Click" />
             <asp:Button runat="server" ID='btnBuy' OnClick="btnBuy_Click" />
             <asp:HiddenField runat="server" ClientIDMode="Static" ID="hfOid" Value="" />
+            <asp:HiddenField runat="server" ClientIDMode="Static" ID="hfMode" Value="" />
+            <asp:HiddenField runat="server" ClientIDMode="Static" ID="hfRating" Value="" />
         </div>
 
         <!-- Modal -->
@@ -340,14 +342,25 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p id="modalbodycontent">
-                            Are you sure you want to cancel this order? This cannot be undone!
-                        </p>
+                        <p id="modalbodycontent"></p>
                         <asp:Label ID="orderRefModal" ClientIDMode="Static" CssClass="small text-secondary" runat="server"></asp:Label>
+
+                        <div id="divFeedback" class="d-none">
+                            <span style="font-size: 2rem;" onmouseout="resetStar()">
+                                <i class="bi bi-star" id="ratingStar-1" onmouseover="hoverStar(1)" onclick="clickStar(1)"></i>
+                                <i class="bi bi-star" id="ratingStar-2" onmouseover="hoverStar(2)" onclick="clickStar(2)"></i>
+                                <i class="bi bi-star" id="ratingStar-3" onmouseover="hoverStar(3)" onclick="clickStar(3)"></i>
+                                <i class="bi bi-star" id="ratingStar-4" onmouseover="hoverStar(4)" onclick="clickStar(4)"></i>
+                                <i class="bi bi-star" id="ratingStar-5" onmouseover="hoverStar(5)" onclick="clickStar(5)"></i>
+                            </span>
+                            <span class="text-muted small" id="ratingNum"></span>
+                            <asp:TextBox ID="txtReviewDesc" runat="server" placeholder="Leave us a review" CssClass="form-control mw-100" TextMode="MultiLine" Style="height: 8rem;" />
+                        </div>
+
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" onclick="cancelOrder()">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Cancel</button>
+                        <button type="button" class="btn btn-danger" onclick="clickButton()">Yes</button>
                     </div>
                 </div>
             </div>
@@ -370,41 +383,52 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="JSContent" runat="server">
 
     <script>
-
-
-
         function getPaidOrderRef(row) {
 
             var orderRef = document.getElementById("dlPaid-orderRef-" + row).innerText
-            document.getElementById("<%= hfOid.ClientID %>").value = orderRef
 
+            document.getElementById("<%= hfOid.ClientID %>").value = orderRef
+            document.getElementById("<%= hfMode.ClientID %>").value = "cancel"
+
+            document.getElementById("staticBackdropLabel").innerText = "Cancel"
             document.getElementById("modalbodycontent").innerText = "Are you sure you want to cancel this order? This cannot be undone!"
 
+        }
 
-            document.getElementById("modalbodycontent").attributes["button-mode"] = "cancel"
+        function closeModal() {
+
+            document.getElementById("staticBackdropLabel").innerText = ""
+            document.getElementById("modalbodycontent").innerText = ""
+            document.getElementById("divFeedback").classList = "d-none"
+
         }
 
         function getShippedOrderRef(row) {
 
             var orderRef = document.getElementById("dlShipped-orderRef-" + row).innerText
-            document.getElementById("<%= hfOid.ClientID %>").value = orderRef
 
-            document.getElementById("modalbodycontent").innerText = "Mark order as received? This cannot be undone."
-            document.getElementById("modalbodycontent").attributes["button-mode"] = "receive"
+            document.getElementById("<%= hfOid.ClientID %>").value = orderRef
+            document.getElementById("<%= hfMode.ClientID %>").value = "receive"
+
+            document.getElementById("staticBackdropLabel").innerText = "Confirm Delivery"
+            document.getElementById("modalbodycontent").innerText = "Mark order as Received? This cannot be undone."
 
         }
 
         function getDeliveredOrderRef(row) {
 
             var orderRef = document.getElementById("dlDelivered-orderRef-" + row).innerText
-            document.getElementById("<%= hfOid.ClientID %>").value = orderRef
-            document.getElementById("modalbodycontent").attributes["button-mode"] = "rate"
 
+            document.getElementById("<%= hfOid.ClientID %>").value = orderRef
+            document.getElementById("<%= hfMode.ClientID %>").value = "rate"
+
+            document.getElementById("divFeedback").classList = ""
+            document.getElementById("staticBackdropLabel").innerText = "Rate your experience with us"
         }
 
-        function cancelOrder() {
+        function clickButton() {
 
-            var buttonMode = document.getElementById("modalbodycontent").attributes["button-mode"]
+            var buttonMode = document.getElementById("<%= hfMode.ClientID %>").value
 
             if (buttonMode == "cancel") {
                 document.getElementById('<%= btnCancel.ClientID %>').click();
@@ -417,10 +441,53 @@
             }
 
             if (buttonMode == "rate") {
+
+                if (document.getElementById('<%= hfRating.ClientID %>').value == "") {
+                    document.getElementById("modalbodycontent").innerText = "Please give a rating!"
+                    document.getElementById("modalbodycontent").classList = "text-danger"
+                    return;
+                }
+
                 document.getElementById('<%= btnRate.ClientID %>').click();
                 return;
             }
 
+        }
+
+        function clickStar(rating) {
+
+            for (i = rating; i > 0; i--) {
+                document.getElementById("ratingStar-" + i).classList = "bi bi-star-fill text-warning"
+            }
+
+            for (i = rating + 1; i <= 5; i++) {
+                document.getElementById("ratingStar-" + i).classList = "bi bi-star"
+            }
+
+            document.getElementById('<%= hfRating.ClientID %>').value = rating
+
+            document.getElementById('ratingNum').innerText = rating + " / 5"
+        }
+
+        function hoverStar(rating) {
+            for (i = rating; i > 0; i--) {
+                document.getElementById("ratingStar-" + i).classList = "bi bi-star-fill text-warning"
+            }
+
+            for (i = rating + 1; i <= 5; i++) {
+                document.getElementById("ratingStar-" + i).classList = "bi bi-star"
+            }
+        }
+
+        function resetStar() {
+
+            if (document.getElementById('<%= hfRating.ClientID %>').value != "") {
+                return;
+            }
+
+            for (i = 1; i <= 5; i++) {
+                document.getElementById("ratingStar-" + i).classList = "bi bi-star"
+            }
         }
 
     </script>

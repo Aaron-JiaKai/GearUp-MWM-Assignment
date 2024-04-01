@@ -312,7 +312,7 @@ namespace MWM_Assignment.Admin
                     }
 
                     transaction.Commit();
-                    setStatus(true, "User Details has been updated successfully!");
+                    setStatus(true, "Product Details has been updated successfully!");
                     conn.Close();
                 }
                 catch (Exception ex)
@@ -410,7 +410,7 @@ namespace MWM_Assignment.Admin
         {
             if (createCategory())
             {
-                setStatus(true, "Category created successully!");
+                setStatus(true, "Product added successully!");
                 divProductDetails.Visible = false;
                 btnCreate.Visible = false;
             }

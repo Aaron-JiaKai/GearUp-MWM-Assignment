@@ -107,6 +107,7 @@
     <Content Include="Admin\ManageCategories.aspx" />
     <Content Include="Admin\ManageProducts.aspx" />
     <Content Include="Admin\ManageOrders.aspx" />
+    <Content Include="Admin\ManageFeedback.aspx" />
     <Content Include="App_Data\GearUpDB.mdf" />
     <Content Include="App_Data\GearUpDB_log.ldf">
       <DependentUpon>GearUpDB.mdf</DependentUpon>
@@ -174,6 +175,7 @@
     <Content Include="Member\OrderDetails.aspx" />
     <Content Include="Admin\Admin.Master" />
     <Content Include="Admin\AdminLogin.aspx" />
+    <Content Include="Feedback.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -242,6 +244,13 @@
     </Compile>
     <Compile Include="Admin\ManageOrders.aspx.designer.cs">
       <DependentUpon>ManageOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ManageFeedback.aspx.cs">
+      <DependentUpon>ManageFeedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ManageFeedback.aspx.designer.cs">
+      <DependentUpon>ManageFeedback.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -367,6 +376,13 @@
     </Compile>
     <Compile Include="Admin\AdminLogin.aspx.designer.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Feedback.aspx.cs">
+      <DependentUpon>Feedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Feedback.aspx.designer.cs">
+      <DependentUpon>Feedback.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

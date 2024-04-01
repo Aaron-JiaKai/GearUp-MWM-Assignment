@@ -16,13 +16,7 @@ namespace MWM_Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["uid"] != null)
-            {
-            }
-            else
-            {
-            }
-
+            
             if (!IsPostBack)
             {
                 loadProducts();

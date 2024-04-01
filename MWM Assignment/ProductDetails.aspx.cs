@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -25,6 +26,7 @@ namespace MWM_Assignment
             {
                 int pid = int.Parse(Session["pid"].ToString());
                 loadProduct(pid);
+                loadReviews(pid);
             }
             else
             {
@@ -59,6 +61,57 @@ namespace MWM_Assignment
 
             reader.Close();
             conn.Close();
+        }
+
+        private void loadReviews(int pid)
+        {
+            DataTable dt = getReviews(pid);
+            dlReview.DataSource = dt;
+            dlReview.DataBind();
+
+            double avgRating = getAverageRating(pid.ToString());
+            lblAvgRating.Text = Math.Round(avgRating, 2).ToString();
+        }
+
+        private DataTable getReviews(int pid)
+        {
+            // Open Connection
+
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+
+            // Query
+            string query = "select r.*, c.name as 'custName', c.profilePicture as 'image' from tblReview r inner join tblCustomers c on r.uid = c.id where r.pid = @pid";
+
+            // SQL Command
+
+            SqlCommand comm = new SqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@pid", pid);
+
+            SqlDataAdapter da = new SqlDataAdapter(comm);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            conn.Close();
+            return dt;
+        }
+
+        protected double getAverageRating(string pid)
+        {
+            int.TryParse(pid, out int pidInt);
+
+            DataTable dt = getReviews(pidInt);
+
+            double averageRating = 0;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                int.TryParse(row["rating"].ToString(), out int rating);
+                averageRating += rating;
+            }
+
+            if (dt.Rows.Count > 0) averageRating /= dt.Rows.Count;
+
+            return averageRating;
         }
 
         protected void btnAddCart_Click(object sender, EventArgs e)
