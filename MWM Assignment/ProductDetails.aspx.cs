@@ -81,7 +81,7 @@ namespace MWM_Assignment
             conn.Open();
 
             // Query
-            string query = "select r.*, c.name as 'custName', c.profilePicture as 'image' from tblReview r inner join tblCustomers c on r.uid = c.id where r.pid = @pid";
+            string query = "select r.*, c.name as 'custName', c.profilePicture as 'image' from tblReview r inner join tblCustomers c on r.uid = c.id where r.pid = @pid order by r.dtAdded desc";
 
             // SQL Command
 
