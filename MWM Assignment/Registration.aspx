@@ -12,11 +12,11 @@
                 <div class="row mb-3">
                     <div class="col-auto me-5">
                         <div class="mb-3 position-relative">
-                            <a onclick="chooseFile()">
+                            <a >
                                 <img id="profileImage" src="/Images/Placeholder/placeholder-user.jpg" alt="Profile Image" class="profile-image" />
                             </a>
                             <asp:FileUpload runat="server" ID="fuProfile" ClientIDMode="Static" CssClass="d-none" onchange="img();" />
-                            <div class="position-absolute d-flex justify-content-center align-items-center profile-image-overlay ">
+                            <div class="position-absolute d-flex justify-content-center align-items-center profile-image-overlay " onclick="chooseFile()">
                                 <i class="bi-pencil-square text-white"></i>
                             </div>
                         </div>

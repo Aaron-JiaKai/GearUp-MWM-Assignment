@@ -2,12 +2,15 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container">
-        <div class="px-5 pt-3 mb-3">
-            <div class="row mb-3">
-                <h1 class="fw-bold mb-3">Order Details</h1>
+        <div class="pt-3 mb-2">
+            <div class="row">
+                <h3 class="text-secondary mb-3">ORDER DETAILS</h3>
+                <hr />
             </div>
         </div>
-
+        <div class="mb-3">
+            <a href='javascript:history.go(-1)' class="text-decoration-none">< Go Back to Previous Page</a>
+        </div>
         <div class="px-5 py-3 bg-white rounded shadow-sm mb-3">
             <div class="row">
                 <div class="col">

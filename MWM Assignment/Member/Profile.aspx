@@ -12,11 +12,11 @@
                 <div class="row mb-3">
                     <div class="col-auto me-5">
                         <div class="mb-3 position-relative">
-                            <a onclick="chooseFile()">
+                            <a>
                                 <img id="profileImage" runat="server" src="~/Images/Placeholder/placeholder-user.jpg" alt="Profile Image" class="profile-image" clientidmode="Static" />
                             </a>
                             <asp:FileUpload runat="server" ID="fuProfile" ClientIDMode="Static" CssClass="d-none" onchange="img();" />
-                            <div class="position-absolute d-flex justify-content-center align-items-center profile-image-overlay ">
+                            <div class="position-absolute d-flex justify-content-center align-items-center profile-image-overlay " onclick="chooseFile()">
                                 <i class="bi-pencil-square text-white"></i>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
 
 
         <!-- Status Message -->
-        <div runat="server" id="divStatus">
+        <div runat="server" id="divStatus" visible="false">
             <div class="position-fixed bottom-0 start-0 w-100">
                 <div runat="server" id="statusBg" class="text-center text-md-start py-2 px-3 px-xl-5 align-items-center text-white">
                     <asp:Label runat="server" ID="lblStatusIcon" CssClass="bi-check-circle text-white h2" />
@@ -98,6 +98,7 @@
 
         function chooseFile() {
             document.getElementById("fuProfile").click();
+
         }
 
         function img() {

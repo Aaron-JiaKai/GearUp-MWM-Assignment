@@ -2,9 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title" class="container" style="min-height: 60vh;">
-        <div class="row g-0 my-5">
+        <div class="row g-0 mt-5 mb-2">
             <h3 class="text-secondary">PRODUCT DETAILS</h3>
             <hr />
+        </div>
+        <div class="mb-3">
+            <a href='javascript:history.go(-1)' class="text-decoration-none">< Go Back to Previous Page</a>
         </div>
         <div class="bg-white p-5 mb-3 shadow-sm">
             <div class="row justify-content-center">
@@ -42,7 +45,7 @@
                         </div>
 
                     </div>
-                </div>
+                 </div>
                 <div class="col-12 col-md px-5">
                     <div class="row">
                         <h3 class="text-secondary">DESCRIPTION</h3>
