@@ -54,7 +54,7 @@ namespace MWM_Assignment
                 }
 
                 fuProfile.SaveAs(Server.MapPath("~//Images//Profile//" + txtEmail.Text + ext));
-                fileUrl = "~/Images/Profile/" + txtName.Text + ext;
+                fileUrl = "~/Images/Profile/" + txtEmail.Text + ext;
 
             }
             else
