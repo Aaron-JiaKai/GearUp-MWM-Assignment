@@ -1,6 +1,6 @@
 # GEARUP - An e-commerce website coded in ASP.NET
 
-A project developed for my Mobile & Web Multimedia assignment. This website is coded in C# using ASP.NET. As part of assignment requirements, the project is developed for both desktop and mobile aspect ratios.
+A project developed for my Mobile & Web Multimedia assignment. This website is coded in C# using ASP.NET. As part of assignment requirements, the project is developed for both desktop and mobile aspect ratios. The project uses a local .mdf database file.
 
 ## ✨ Features
 
