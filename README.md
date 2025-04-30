@@ -36,24 +36,31 @@ Admin can:
 ## 🖼️ Screenshots
 
 1. Home/Landing Page
+
 ![Picture1](https://github.com/user-attachments/assets/c6d98fce-a17b-4a3e-96da-f963efaea01f)
 
 2. Products List Page
+
 ![Picture2](https://github.com/user-attachments/assets/d2a924d9-738a-409f-bece-a74b23b99322)
 
 3. Products Details Page
+   
 ![Picture3](https://github.com/user-attachments/assets/14fc5a47-29b2-40c7-af23-ab237e6ce946)
 
 4. Cart Page
+   
 ![Picture4](https://github.com/user-attachments/assets/87ae6eaa-49e5-46ca-ac74-68cdc8bab289)
 
 5. Checkout Page
+    
 ![Picture5](https://github.com/user-attachments/assets/935c8468-1a12-4b7b-accc-456b063055ee)
 
 6. Admin - Manage Users Page
+    
 ![Picture6](https://github.com/user-attachments/assets/0b9b05bc-6c3b-4880-af2d-829a5a872aa9)
 
 7. Admin - Manage Products Page
+    
 ![Picture7](https://github.com/user-attachments/assets/906c0d86-f72d-4f3d-bca0-7a67ebd4084d)
 
 
